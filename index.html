@@ -729,6 +729,39 @@
       color: var(--dim);
     }
 
+    /* ─── PLAYLISTS (Spotify embeds) ─── */
+    .playlist-genre {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+    .playlist-card iframe {
+      width: 100%;
+      display: block;
+      border: none;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+    }
+
+    /* ─── WRAPS (linked) ─── */
+    .wrap-item a.wrap-link {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      color: inherit;
+      text-decoration: none;
+    }
+    .wrap-credit {
+      font-family: var(--mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.4);
+      margin-top: 2px;
+    }
+
     /* ─── HIDDEN UTILITY ─── */
     .hidden { display: none !important; }
   </style>
@@ -766,8 +799,8 @@
   </div>
   <div class="hero-right">
     <div class="hero-stat">
-      <span class="stat-num">25+</span>
-      <span class="stat-label">shows<br>this season</span>
+      <span class="stat-num" id="stat-month-count">—</span>
+      <span class="stat-label">shows<br>this month</span>
     </div>
     <div class="hero-stat">
       <span class="stat-num">3</span>
@@ -867,57 +900,38 @@
   <div class="playlists-grid">
 
     <div class="playlist-card">
-      <div class="playlist-art">
-        <div class="playlist-art-inner pa-1">🌊</div>
-        <span class="playlist-num">24 tracks · 1h 22m</span>
-      </div>
-      <div class="playlist-title">The Central Coast Starter Pack</div>
-      <div class="playlist-meta">Essential local acts · Updated Apr 2026</div>
+      <div class="playlist-genre">Folk / Americana</div>
+      <iframe src="https://open.spotify.com/embed/playlist/2Y501jVxOKEGN0tqeNXa3M?utm_source=generator" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <div class="playlist-title">Alternate Folk</div>
+      <div class="playlist-meta">Dark folk · Americana · Southern Gothic · 213 tracks</div>
     </div>
 
     <div class="playlist-card">
-      <div class="playlist-art">
-        <div class="playlist-art-inner pa-2">🌅</div>
-        <span class="playlist-num">18 tracks · 58m</span>
-      </div>
-      <div class="playlist-title">Sunset Drive on Hwy 1</div>
-      <div class="playlist-meta">Mellow indie / dream pop · Apr 2026</div>
+      <div class="playlist-genre">Deep House</div>
+      <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX2TRYkJECvfC?utm_source=generator" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <div class="playlist-title">Deep House Relax</div>
+      <div class="playlist-meta">Spotify Editorial · 3.4M saves</div>
     </div>
 
     <div class="playlist-card">
-      <div class="playlist-art">
-        <div class="playlist-art-inner pa-3">🌲</div>
-        <span class="playlist-num">31 tracks · 2h 10m</span>
-      </div>
-      <div class="playlist-title">Pit Season — Spring Shows</div>
-      <div class="playlist-meta">Loud &amp; live picks · Mar/Apr 2026</div>
+      <div class="playlist-genre">Indie Rock</div>
+      <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX2sUQwD7tbmL?utm_source=generator" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <div class="playlist-title">Feel-Good Indie Rock</div>
+      <div class="playlist-meta">Spotify Editorial · 2.3M saves</div>
     </div>
 
     <div class="playlist-card">
-      <div class="playlist-art">
-        <div class="playlist-art-inner pa-4">🎙</div>
-        <span class="playlist-num">12 tracks · 44m</span>
-      </div>
-      <div class="playlist-title">New Locals: April Radar</div>
-      <div class="playlist-meta">Freshest drops from the 805 · This month</div>
+      <div class="playlist-genre">Deep House</div>
+      <iframe src="https://open.spotify.com/embed/playlist/5h1oEk4W9KVMHkOd8WWWlC?utm_source=generator" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <div class="playlist-title">Deep House 2026</div>
+      <div class="playlist-meta">Electronic dance hits &amp; remixes · 866K saves</div>
     </div>
 
     <div class="playlist-card">
-      <div class="playlist-art">
-        <div class="playlist-art-inner pa-5">🏜</div>
-        <span class="playlist-num">22 tracks · 1h 35m</span>
-      </div>
-      <div class="playlist-title">Paso Desert Blues</div>
-      <div class="playlist-meta">Psych &amp; slow burn · Paso Robles sessions</div>
-    </div>
-
-    <div class="playlist-card">
-      <div class="playlist-art">
-        <div class="playlist-art-inner pa-6">🌙</div>
-        <span class="playlist-num">16 tracks · 1h 8m</span>
-      </div>
-      <div class="playlist-title">Late Night Santa Barbara</div>
-      <div class="playlist-meta">Post-show cool-down · After midnight vibes</div>
+      <div class="playlist-genre">Metal</div>
+      <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX9qNs32fujYe?utm_source=generator" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <div class="playlist-title">Heavy Metal</div>
+      <div class="playlist-meta">Spotify Editorial · 1.4M saves</div>
     </div>
 
   </div>
@@ -936,49 +950,49 @@
   </div>
   <div class="interviews-grid">
 
-    <div class="interview-card interview-feat">
+    <a class="interview-card interview-feat" href="https://kcpr.org/carpool-tunnel-is-ready-to-bloom-with-their-debut-album/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
       <div class="interview-img">
         <div class="interview-img-inner ii-1"></div>
       </div>
-      <div class="interview-kicker">Cover Story</div>
+      <div class="interview-kicker">Band Feature · KCPR</div>
       <div class="interview-title">
-        Levitation Room have been chasing a sound since high school. Playing the Deer Lodge on May 1st, they're closer than ever.
+        Carpool Tunnel is ready to 'Bloom' with their debut album
       </div>
       <div class="interview-excerpt">
-        Formed in Ojai around a mutual love of '60s garage rock played with a psychedelic twist, Julian Porte, Gabriel Fernandez, Jonathan Martin, and Kevin Perez have been quietly building one of the most compelling sounds on the Central Coast. We talked to them about growing up in the 805, the influence of the valley's landscape on their music, and what it means to stay DIY when labels come calling. Their Deer Lodge show May 1st is a must.
+        San Luis Obispo modern rock band Carpool Tunnel discusses their debut album "Bloom" — how members connected via a musician app, the SLO scene's evolving identity, and what it means to record your first full-length in the 805. One of Cal Poly's finest right now.
       </div>
-      <div class="interview-meta">Apr 17, 2026 · 7 min read · via Psychedelic Scene Magazine</div>
-    </div>
+      <div class="interview-meta">2026 · via KCPR, Cal Poly SLO</div>
+    </a>
 
-    <div class="interview-card">
+    <a class="interview-card" href="https://kcpr.org/behind-the-burnt-dog/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
       <div class="interview-img">
         <div class="interview-img-inner ii-2"></div>
       </div>
-      <div class="interview-kicker">Band Profile</div>
-      <div class="interview-title">Maclovia: The Ojai band bringing Latin rock and psych to the Central Coast underground</div>
-      <div class="interview-excerpt">Vocalist Vanessa Jimenez, guitarist Greg Jimenez, and the rest of Maclovia forged their sound between Tepatitlán and Ojai — and the contrast shows.</div>
-      <div class="interview-meta">Apr 10, 2026 · 5 min read · via VC Reporter</div>
-    </div>
+      <div class="interview-kicker">Session · KCPR</div>
+      <div class="interview-title">Behind the Burnt Dog: LSD and the Search for God</div>
+      <div class="interview-excerpt">A behind-the-scenes look at KCPR's Burnt Dog Session with SF shoegaze band LSD and the Search for God — recorded live on the Cal Poly airwaves.</div>
+      <div class="interview-meta">Feb 26, 2026 · via KCPR · Jordan Mendelevitch</div>
+    </a>
 
-    <div class="interview-card">
+    <a class="interview-card" href="https://www.newtimesslo.com/the-mother-corn-shuckers-release-sunset-gold-at-the-siren-on-april-16/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
       <div class="interview-img">
         <div class="interview-img-inner ii-3"></div>
       </div>
-      <div class="interview-kicker">Venue Spotlight</div>
-      <div class="interview-title">The Siren in Morro Bay is the small room the Central Coast didn't know it needed</div>
-      <div class="interview-excerpt">Intimate, loud, and right on the bay. How a 150-cap room in Morro Bay became one of the region's most important stages.</div>
-      <div class="interview-meta">Apr 3, 2026 · 4 min read</div>
-    </div>
+      <div class="interview-kicker">Album Release · New Times SLO</div>
+      <div class="interview-title">The Mother Corn Shuckers release Sunset Gold at The Siren</div>
+      <div class="interview-excerpt">Local bluegrass-rock outfit The Mother Corn Shuckers drop "Sunset Gold" — produced by The Mother Hips frontman Tim Bluhm — with a release party at The Siren in Morro Bay.</div>
+      <div class="interview-meta">Apr 2026 · via New Times SLO</div>
+    </a>
 
-    <div class="interview-card">
+    <a class="interview-card" href="https://www.independent.com/2026/04/20/mexican-jazz-songbirding/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
       <div class="interview-img">
         <div class="interview-img-inner ii-4"></div>
       </div>
-      <div class="interview-kicker">Scene Report</div>
-      <div class="interview-title">Salty Strings, Stereo Chickens &amp; the new wave of 805 originals you should know</div>
-      <div class="interview-excerpt">From Santa Barbara bluegrass to SLO Americana — the local originals making noise in 2026, including New Times SLO's picks for bands to watch.</div>
-      <div class="interview-meta">Mar 28, 2026 · 6 min read · via New Times SLO</div>
-    </div>
+      <div class="interview-kicker">Live Preview · SB Independent</div>
+      <div class="interview-title">Mexican Jazz Songbirding: young singer Lucía makes her Santa Barbara debut</div>
+      <div class="interview-excerpt">Sarah Vaughan International Jazz Vocal Competition winner Lucía makes her Santa Barbara debut at Hahn Hall — the Independent previews her set and what the city's jazz season looks like this spring.</div>
+      <div class="interview-meta">Apr 20, 2026 · via Santa Barbara Independent</div>
+    </a>
 
   </div>
 </div>
@@ -998,48 +1012,63 @@
   <div class="wraps-grid">
 
     <div class="wrap-item">
-      <div class="wrap-photo wi-1"></div>
-      <span class="wrap-photo-count">28 photos</span>
-      <div class="wrap-caption">
-        <div class="wrap-event">The Fronds @ SLO Brew Rock</div>
-        <div class="wrap-date-loc">Apr 12, 2026 · San Luis Obispo</div>
-      </div>
+      <a class="wrap-link" href="https://www.instagram.com/slobrewlive/" target="_blank" rel="noopener">
+        <div class="wrap-photo wi-1"></div>
+        <span class="wrap-photo-count">View gallery ↗</span>
+        <div class="wrap-caption">
+          <div class="wrap-event">Recent Shows @ SLO Brew Rock</div>
+          <div class="wrap-date-loc">San Luis Obispo · 2026</div>
+          <div class="wrap-credit">📷 @slobrewlive</div>
+        </div>
+      </a>
     </div>
 
     <div class="wrap-item">
-      <div class="wrap-photo wi-2"></div>
-      <span class="wrap-photo-count">14 photos</span>
-      <div class="wrap-caption">
-        <div class="wrap-event">Velvet Fault @ Frog &amp; Peach</div>
-        <div class="wrap-date-loc">Apr 8, 2026 · San Luis Obispo</div>
-      </div>
+      <a class="wrap-link" href="https://www.sohosb.com/gallery" target="_blank" rel="noopener">
+        <div class="wrap-photo wi-2"></div>
+        <span class="wrap-photo-count">View gallery ↗</span>
+        <div class="wrap-caption">
+          <div class="wrap-event">Live at SoHo Music Club</div>
+          <div class="wrap-date-loc">Santa Barbara · Spring 2026</div>
+          <div class="wrap-credit">📷 SoHo Photo Gallery</div>
+        </div>
+      </a>
     </div>
 
     <div class="wrap-item">
-      <div class="wrap-photo wi-3"></div>
-      <span class="wrap-photo-count">19 photos</span>
-      <div class="wrap-caption">
-        <div class="wrap-event">Ghost Pines @ SoHo Music Club</div>
-        <div class="wrap-date-loc">Apr 2, 2026 · Santa Barbara</div>
-      </div>
+      <a class="wrap-link" href="https://www.instagram.com/venturamusichall/" target="_blank" rel="noopener">
+        <div class="wrap-photo wi-3"></div>
+        <span class="wrap-photo-count">View gallery ↗</span>
+        <div class="wrap-caption">
+          <div class="wrap-event">Ventura Music Hall Nights</div>
+          <div class="wrap-date-loc">Ventura · 2026</div>
+          <div class="wrap-credit">📷 @venturamusichall</div>
+        </div>
+      </a>
     </div>
 
     <div class="wrap-item">
-      <div class="wrap-photo wi-4"></div>
-      <span class="wrap-photo-count">11 photos</span>
-      <div class="wrap-caption">
-        <div class="wrap-event">Moonslide @ Discovery Ventura</div>
-        <div class="wrap-date-loc">Mar 22, 2026 · Ventura</div>
-      </div>
+      <a class="wrap-link" href="https://www.venturatheater.net/photos/" target="_blank" rel="noopener">
+        <div class="wrap-photo wi-4"></div>
+        <span class="wrap-photo-count">View gallery ↗</span>
+        <div class="wrap-caption">
+          <div class="wrap-event">Majestic Ventura Theater</div>
+          <div class="wrap-date-loc">Ventura · 2026</div>
+          <div class="wrap-credit">📷 Ventura Theater Photo Archive</div>
+        </div>
+      </a>
     </div>
 
     <div class="wrap-item">
-      <div class="wrap-photo wi-5"></div>
-      <span class="wrap-photo-count">22 photos</span>
-      <div class="wrap-caption">
-        <div class="wrap-event">Chorro Creek @ Tooth &amp; Nail</div>
-        <div class="wrap-date-loc">Mar 15, 2026 · Paso Robles</div>
-      </div>
+      <a class="wrap-link" href="https://www.instagram.com/thesirenmorrobay/" target="_blank" rel="noopener">
+        <div class="wrap-photo wi-5"></div>
+        <span class="wrap-photo-count">View gallery ↗</span>
+        <div class="wrap-caption">
+          <div class="wrap-event">Nights at The Siren</div>
+          <div class="wrap-date-loc">Morro Bay · 2026</div>
+          <div class="wrap-credit">📷 @thesirenmorrobay</div>
+        </div>
+      </a>
     </div>
 
   </div>
@@ -1182,9 +1211,13 @@
 
   function renderPosters(data) {
     const el = document.getElementById("view-poster");
-    el.innerHTML = data.map((s, i) => `
+    el.innerHTML = data.map((s, i) => {
+      const bgStyle = s.poster
+        ? `style="background-image:url('${s.poster}');background-size:cover;background-position:center;"`
+        : "";
+      return `
       <a class="poster-card ${posterPalettes[i % 8]}" href="${s.url}" target="_blank" rel="noopener" style="text-decoration:none;">
-        <div class="poster-bg"></div>
+        <div class="poster-bg" ${bgStyle}></div>
         <div class="poster-overlay"></div>
         <span class="poster-price-badge">${s.price}</span>
         <div class="poster-content">
@@ -1192,8 +1225,8 @@
           <div class="poster-band">${s.band}</div>
           <div class="poster-venue">${s.venue}</div>
         </div>
-      </a>
-    `).join("");
+      </a>`;
+    }).join("");
   }
 
   function render() {
@@ -1224,6 +1257,15 @@
     btn.classList.add("active");
     render();
   }
+
+  /* ── Dynamic month stat ── */
+  (function() {
+    const monthNames = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+    const currentMonth = monthNames[new Date().getMonth()];
+    const count = shows.filter(s => s.month === currentMonth).length;
+    const el = document.getElementById("stat-month-count");
+    if (el) el.textContent = count > 0 ? count : shows.length;
+  })();
 
   /* ── Init ── */
   render();

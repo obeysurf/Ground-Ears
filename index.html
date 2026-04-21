@@ -933,6 +933,22 @@
       color: var(--muted);
       line-height: 1.6;
     }
+    .art-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s;
+    }
+    .art-card:hover .art-img img { transform: scale(1.04); }
+    .art-credit, .globe-credit {
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      opacity: 0.55;
+      padding-top: 0.35rem;
+    }
 
     /* ─── HIDDEN UTILITY ─── */
     .hidden { display: none !important; }
@@ -1225,6 +1241,7 @@
           <a class="globe-link" href="https://www.radionica.rocks/musica/artistas-colombianos/babelgam-y-el-contraste-sin-limites" target="_blank" rel="noopener">Read →</a>
           <a class="globe-link yt" href="https://www.youtube.com/watch?v=lSBUepWSeek" target="_blank" rel="noopener">▶ Watch</a>
         </div>
+        <div class="globe-credit">📷 via YouTube</div>
       </div>
     </div>
 
@@ -1243,24 +1260,26 @@
           <a class="globe-link" href="https://soundsandcolours.com/articles/colombia/12-new-colombian-bands-need-hear-39551/" target="_blank" rel="noopener">Read →</a>
           <a class="globe-link yt" href="https://www.youtube.com/watch?v=fuTC87N4JAY" target="_blank" rel="noopener">▶ Watch</a>
         </div>
+        <div class="globe-credit">📷 via YouTube</div>
       </div>
     </div>
 
     <div class="globe-card">
       <div class="globe-hero">
-        <img src="https://img.youtube.com/vi/iBYERd4_z-A/maxresdefault.jpg"
-             alt="MULA live"
+        <img src="https://img.youtube.com/vi/m9jHZ_pa2PM/maxresdefault.jpg"
+             alt="Meridian Brothers — NPR Tiny Desk"
              onerror="this.style.display='none';this.parentElement.querySelector('.globe-hero-fallback').style.display='flex'">
         <div class="globe-hero-fallback" style="background:linear-gradient(135deg,#001a0d,#004830);">🎺</div>
       </div>
       <div class="globe-body">
-        <div class="globe-genre">Free Jazz / Experimental</div>
-        <div class="globe-band">MULA</div>
-        <div class="globe-desc">Bogotá's foremost free jazz collective — no boundaries, no predictability. MULA improvises across jazz, noise, and folk with an urgency that's won them a devoted following across the Latin American experimental circuit.</div>
+        <div class="globe-genre">Experimental Cumbia / Avant-Garde</div>
+        <div class="globe-band">MERIDIAN BROTHERS</div>
+        <div class="globe-desc">Bogotá's most singular experimental project, led by Eblis Álvarez since 1998 — fusing cumbia, vallenato, and electronic music into psychedelic, shape-shifting sounds unlike anything else. Featured on NPR Tiny Desk and KEXP.</div>
         <div class="globe-links">
-          <a class="globe-link" href="https://www.radionica.rocks/musica/artistas-colombianos/" target="_blank" rel="noopener">Read →</a>
-          <a class="globe-link yt" href="https://www.youtube.com/watch?v=iBYERd4_z-A" target="_blank" rel="noopener">▶ Watch</a>
+          <a class="globe-link" href="https://daily.bandcamp.com/scene-report/bogota-cumbia-frente-cumbiero-interview" target="_blank" rel="noopener">Read →</a>
+          <a class="globe-link yt" href="https://www.youtube.com/watch?v=m9jHZ_pa2PM" target="_blank" rel="noopener">▶ Tiny Desk</a>
         </div>
+        <div class="globe-credit">📷 via NPR Tiny Desk Concerts</div>
       </div>
     </div>
 
@@ -1279,6 +1298,7 @@
           <a class="globe-link" href="https://garajedelrock.com/entrevistas/lika-nova-ha-sido-increible-el-cambio-para-bien-que-ha-traido-el-auge-de-colombia/" target="_blank" rel="noopener">Read →</a>
           <a class="globe-link yt" href="https://www.youtube.com/watch?v=PZKiXTH9UNM" target="_blank" rel="noopener">▶ Watch</a>
         </div>
+        <div class="globe-credit">📷 via YouTube</div>
       </div>
     </div>
 
@@ -1299,32 +1319,40 @@
   <div class="art-grid">
 
     <a class="art-card" href="https://www.sbma.net/exhibitions" target="_blank" rel="noopener">
-      <div class="art-img"><div class="art-img-inner ai-1">🎨</div></div>
+      <div class="art-img">
+        <img src="https://img.youtube.com/vi/PLPUx7jsvU8/maxresdefault.jpg" alt="Santa Barbara Museum of Art"
+             onerror="this.parentElement.innerHTML='<div class=\'art-img-inner ai-1\'>🎨</div>'">
+      </div>
       <div class="art-body">
         <div class="art-type">Permanent Collection</div>
         <div class="art-title">Modern Life: A Global Artworld, 1850–1950</div>
         <div class="art-meta">Through May 31, 2026 · Santa Barbara Museum of Art · SB</div>
         <div class="art-desc">Highlights from the SBMA permanent collection spanning Impressionism through early Modernism — 100 years of global art history in one room.</div>
+        <div class="art-credit">📷 via SBMA / YouTube</div>
       </div>
     </a>
 
-    <a class="art-card" href="https://www.mcasantabarbara.org/" target="_blank" rel="noopener">
-      <div class="art-img"><div class="art-img-inner ai-2">🖼️</div></div>
+    <a class="art-card" href="https://www.mcasantabarbara.org/exhibition/djjavier/" target="_blank" rel="noopener">
+      <div class="art-img">
+        <img src="https://img.youtube.com/vi/yMNcnaDOc1c/maxresdefault.jpg" alt="DJ Javier: San Milano Drive at MCASB"
+             onerror="this.parentElement.innerHTML='<div class=\'art-img-inner ai-2\'>🖼️</div>'">
+      </div>
       <div class="art-body">
-        <div class="art-type">Solo Exhibition</div>
+        <div class="art-type">Solo Exhibition · Through Apr 26</div>
         <div class="art-title">DJ Javier: San Milano Drive</div>
-        <div class="art-meta">Opens Apr 20, 2026 · MCA Santa Barbara · SB</div>
-        <div class="art-desc">Debut solo museum show from Santa Barbara–based Filipino-American artist DJ Javier. A landmark moment for local contemporary art.</div>
+        <div class="art-meta">Through Apr 26, 2026 · MCA Santa Barbara · SB</div>
+        <div class="art-desc">Debut solo museum show from SB–based Filipino-American artist DJ Javier — large-scale paintings, murals, sculpture, and interactive installations celebrating Filipino heritage and surf culture.</div>
+        <div class="art-credit">📷 via The Creative Community / YouTube</div>
       </div>
     </a>
 
-    <a class="art-card" href="https://www.mcasantabarbara.org/exhibitions/" target="_blank" rel="noopener">
+    <a class="art-card" href="https://www.mcasantabarbara.org/exhibition/artedelpueblo/" target="_blank" rel="noopener">
       <div class="art-img"><div class="art-img-inner ai-3">🌺</div></div>
       <div class="art-body">
-        <div class="art-type">Group Exhibition</div>
-        <div class="art-title">Arte Del Pueblo</div>
+        <div class="art-type">Open Group Exhibition</div>
+        <div class="art-title">The New Salon: Arte Del Pueblo</div>
         <div class="art-meta">Jun 7 – Jul 25, 2026 · MCA Santa Barbara · SB</div>
-        <div class="art-desc">A community-centered exhibition celebrating Latinx art and culture. Opening reception June 7, noon–3pm — free and open to all.</div>
+        <div class="art-desc">MCASB's beloved annual open-call show — no jurors, no curators, all welcome. Opening reception June 7, noon–3pm, free. Submit work May 26–27.</div>
       </div>
     </a>
 
@@ -1334,47 +1362,63 @@
         <div class="art-type">BFA Show · Photography</div>
         <div class="art-title">F/6 — Cal Poly BFA Photography</div>
         <div class="art-meta">May 22–29, 2026 · Cal Poly University Art Gallery · SLO</div>
-        <div class="art-desc">Senior BFA photography exhibition from Cal Poly's fine arts program. Opening reception May 22, 5–7pm. Free admission.</div>
+        <div class="art-desc">Senior BFA photography exhibition from Cal Poly's fine arts program. Opening reception May 22, 5–7pm. Free and open to the public.</div>
       </div>
     </a>
 
     <a class="art-card" href="https://sloma.org/exhibits/current/" target="_blank" rel="noopener">
-      <div class="art-img"><div class="art-img-inner ai-5">🏛️</div></div>
+      <div class="art-img">
+        <img src="https://img.youtube.com/vi/bwk6pWdE0x4/maxresdefault.jpg" alt="SLOMA gallery exhibition"
+             onerror="this.parentElement.innerHTML='<div class=\'art-img-inner ai-5\'>🏛️</div>'">
+      </div>
       <div class="art-body">
         <div class="art-type">Rotating Exhibitions</div>
         <div class="art-title">SLOMA Spring 2026</div>
         <div class="art-meta">Ongoing · San Luis Obispo Museum of Art · SLO</div>
-        <div class="art-desc">Rotating shows featuring local and regional artists alongside public art installations. Art After Dark on the first Friday of every month.</div>
+        <div class="art-desc">Rotating shows featuring local and regional artists alongside public art installations. Art After Dark on the first Friday of every month. Free admission.</div>
+        <div class="art-credit">📷 via SLOMA / YouTube</div>
       </div>
     </a>
 
     <a class="art-card" href="https://www.westmont.edu/museum" target="_blank" rel="noopener">
-      <div class="art-img"><div class="art-img-inner ai-6">🎓</div></div>
+      <div class="art-img">
+        <img src="https://img.youtube.com/vi/Mym5_Tk0d2Y/maxresdefault.jpg" alt="Westmont Ridley-Tree Museum of Art"
+             onerror="this.parentElement.innerHTML='<div class=\'art-img-inner ai-6\'>🎓</div>'">
+      </div>
       <div class="art-body">
         <div class="art-type">Senior Exhibition</div>
         <div class="art-title">Re-Encounter</div>
         <div class="art-meta">Spring 2026 · Westmont Ridley-Tree Museum of Art · SB</div>
         <div class="art-desc">Annual senior show with 14 emerging artists exploring memory, identity, and the space between past and future lives. Free admission.</div>
+        <div class="art-credit">📷 via Westmont Ridley-Tree Museum</div>
       </div>
     </a>
 
     <a class="art-card" href="https://studiochannelislands.org/gallery/" target="_blank" rel="noopener">
-      <div class="art-img"><div class="art-img-inner ai-7">🎭</div></div>
+      <div class="art-img">
+        <img src="https://img.youtube.com/vi/q4l_PReD3_M/maxresdefault.jpg" alt="Studio Channel Islands exhibition"
+             onerror="this.parentElement.innerHTML='<div class=\'art-img-inner ai-7\'>🎭</div>'">
+      </div>
       <div class="art-body">
         <div class="art-type">Group Show</div>
         <div class="art-title">New Work from Across the US</div>
         <div class="art-meta">Jun 6 – Jul 25, 2026 · Studio Channel Islands · Camarillo</div>
         <div class="art-desc">A diverse group show featuring new paintings, sculpture, and mixed media from artists across the United States. Free to attend.</div>
+        <div class="art-credit">📷 via Studio Channel Islands / YouTube</div>
       </div>
     </a>
 
-    <a class="art-card" href="https://venturamuseum.org/" target="_blank" rel="noopener">
-      <div class="art-img"><div class="art-img-inner ai-8">🖌️</div></div>
+    <a class="art-card" href="https://decadebrothers.com/" target="_blank" rel="noopener">
+      <div class="art-img">
+        <img src="https://img.youtube.com/vi/FaOp4Usf3G4/maxresdefault.jpg" alt="Andres Salazar at WAV Gallery Ventura"
+             onerror="this.parentElement.innerHTML='<div class=\'art-img-inner ai-8\'>🖌️</div>'">
+      </div>
       <div class="art-body">
         <div class="art-type">Solo Show · Paintings</div>
         <div class="art-title">Love and Loss — Andres Salazar</div>
         <div class="art-meta">Opened Apr 4, 2026 · The WAV Gallery · Ventura</div>
-        <div class="art-desc">Over 30 new paintings and works on paper by Ventura artist Andres Salazar, exploring grief, love, and the human condition.</div>
+        <div class="art-desc">Over 30 new oil paintings and works on paper exploring grief, love, and transformation. Opening featured live music by Mike Fonte.</div>
+        <div class="art-credit">📷 via WAV Gallery Ventura / YouTube</div>
       </div>
     </a>
 

@@ -615,6 +615,22 @@
       letter-spacing: 0.08em;
       color: var(--dim);
     }
+    .interview-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s;
+    }
+    .interview-card:hover .interview-img img { transform: scale(1.04); }
+    .interview-credit {
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      letter-spacing: 0.06em;
+      color: var(--dim);
+      opacity: 0.7;
+      margin-top: 0.4rem;
+    }
 
     /* ─── WRAPS ─── */
     .wraps-grid {
@@ -1106,16 +1122,16 @@
 
     <div class="playlist-card">
       <div class="playlist-genre">Indie Rock</div>
-      <iframe src="https://open.spotify.com/embed/playlist/3GovsX6fNJfaFazt4nTr9s?utm_source=generator" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe src="https://open.spotify.com/embed/playlist/1cAHI20k456593GCBNqzw6?utm_source=generator" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
       <div class="playlist-title">Indie Underground</div>
-      <div class="playlist-meta">Curated by Amanita Tunes · 324 tracks</div>
+      <div class="playlist-meta">Curated pick · underground indie rotation</div>
     </div>
 
     <div class="playlist-card">
       <div class="playlist-genre">Deep House</div>
-      <iframe src="https://open.spotify.com/embed/playlist/7f8zluP5kOxwXyLH9jcIy6?utm_source=generator" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <iframe src="https://open.spotify.com/embed/playlist/1zoQNgZ6FexCrVQZN0MHHb?utm_source=generator" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
       <div class="playlist-title">Underground House 2025</div>
-      <div class="playlist-meta">Curated by Poison Ghost · 47 tracks · 18K saves</div>
+      <div class="playlist-meta">Curated pick · underground house rotation</div>
     </div>
 
     <div class="playlist-card">
@@ -1164,46 +1180,58 @@
 
     <a class="interview-card interview-feat" href="https://kcpr.org/carpool-tunnel-is-ready-to-bloom-with-their-debut-album/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
       <div class="interview-img">
-        <div class="interview-img-inner ii-1"></div>
+        <img src="https://img.youtube.com/vi/Gpu4fdD8xbg/maxresdefault.jpg" alt="Carpool Tunnel — Bloom live performance"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="interview-img-inner ii-1" style="display:none;"></div>
       </div>
       <div class="interview-kicker">Band Feature · KCPR</div>
       <div class="interview-title">
         Carpool Tunnel is ready to 'Bloom' with their debut album
       </div>
       <div class="interview-excerpt">
-        San Luis Obispo modern rock band Carpool Tunnel discusses their debut album "Bloom" — how members connected via a musician app, the SLO scene's evolving identity, and what it means to record your first full-length in the 805. One of Cal Poly's finest right now.
+        SLO modern rock band Carpool Tunnel discusses their debut album "Bloom" — how members connected via a musician app, the SLO scene's evolving identity, and what it means to record your first full-length in the 805. One of Cal Poly's finest right now.
       </div>
       <div class="interview-meta">2026 · via KCPR, Cal Poly SLO</div>
+      <div class="interview-credit">📷 via YouTube</div>
     </a>
 
     <a class="interview-card" href="https://kcpr.org/behind-the-burnt-dog/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
       <div class="interview-img">
-        <div class="interview-img-inner ii-2"></div>
+        <img src="https://img.youtube.com/vi/FNVA31CvZzY/maxresdefault.jpg" alt="LSD and the Search for God live at Mercury Lounge"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="interview-img-inner ii-2" style="display:none;"></div>
       </div>
       <div class="interview-kicker">Session · KCPR</div>
       <div class="interview-title">Behind the Burnt Dog: LSD and the Search for God</div>
       <div class="interview-excerpt">A behind-the-scenes look at KCPR's Burnt Dog Session with SF shoegaze band LSD and the Search for God — recorded live on the Cal Poly airwaves.</div>
       <div class="interview-meta">Feb 26, 2026 · via KCPR · Jordan Mendelevitch</div>
+      <div class="interview-credit">📷 via YouTube · Mercury Lounge NYC 2025</div>
     </a>
 
     <a class="interview-card" href="https://www.newtimesslo.com/the-mother-corn-shuckers-release-sunset-gold-at-the-siren-on-april-16/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
       <div class="interview-img">
-        <div class="interview-img-inner ii-3"></div>
+        <img src="https://img.youtube.com/vi/w3f0DiWYdtE/maxresdefault.jpg" alt="The Mother Corn Shuckers — Keep Me From You"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="interview-img-inner ii-3" style="display:none;"></div>
       </div>
       <div class="interview-kicker">Album Release · New Times SLO</div>
       <div class="interview-title">The Mother Corn Shuckers release Sunset Gold at The Siren</div>
       <div class="interview-excerpt">Local bluegrass-rock outfit The Mother Corn Shuckers drop "Sunset Gold" — produced by The Mother Hips frontman Tim Bluhm — with a release party at The Siren in Morro Bay.</div>
       <div class="interview-meta">Apr 2026 · via New Times SLO</div>
+      <div class="interview-credit">📷 via The Mother Corn Shuckers / YouTube</div>
     </a>
 
     <a class="interview-card" href="https://www.independent.com/2026/04/20/mexican-jazz-songbirding/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
       <div class="interview-img">
-        <div class="interview-img-inner ii-4"></div>
+        <img src="https://img.youtube.com/vi/RYRsetd7CW8/maxresdefault.jpg" alt="Lucía performing at Charlie Parker Jazz Festival"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="interview-img-inner ii-4" style="display:none;"></div>
       </div>
       <div class="interview-kicker">Live Preview · SB Independent</div>
       <div class="interview-title">Mexican Jazz Songbirding: young singer Lucía makes her Santa Barbara debut</div>
       <div class="interview-excerpt">Sarah Vaughan International Jazz Vocal Competition winner Lucía makes her Santa Barbara debut at Hahn Hall — the Independent previews her set and what the city's jazz season looks like this spring.</div>
       <div class="interview-meta">Apr 20, 2026 · via Santa Barbara Independent</div>
+      <div class="interview-credit">📷 via Charlie Parker Jazz Festival / YouTube</div>
     </a>
 
   </div>

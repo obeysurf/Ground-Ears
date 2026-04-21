@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ground Ears — Central Coast Underground</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ─── TOKENS ─── */
+    :root {
+      --bg:       #0c0b09;
+      --bg2:      #141311;
+      --bg3:      #1c1a17;
+      --bg4:      #222018;
+      --text:     #e8e3d8;
+      --muted:    #6b6560;
+      --dim:      #3a3630;
+      --accent:   #ff3d00;
+      --lime:     #c8f53c;
+      --border:   #252320;
+      --serif:    'Syne', system-ui, sans-serif;
+      --mono:     'Space Mono', monospace;
+    }
+
+    /* ─── RESET ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--serif);
+      font-size: 16px;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; border: none; background: none; font: inherit; color: inherit; }
+
+    /* Grain overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      opacity: 0.45;
+    }
+
+    /* ─── NAV ─── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.75rem;
+      background: rgba(12,11,9,0.9);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .logo-dot { color: var(--accent); }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-pill {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid var(--dim);
+      color: var(--muted);
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+    @media (max-width: 640px) {
+      .nav-links, .nav-pill { display: none; }
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding: 5rem 1.75rem 4rem;
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: end;
+    }
+    @media (max-width: 760px) {
+      .hero { grid-template-columns: 1fr; padding: 3rem 1.25rem 2.5rem; }
+    }
+    .hero-left {}
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.4rem;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-weight: 800;
+      font-size: clamp(3.2rem, 8vw, 6.5rem);
+      line-height: 0.92;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--text);
+    }
+    .hero-desc {
+      margin-top: 1.8rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 360px;
+    }
+    .hero-desc strong { color: var(--text); font-weight: 500; }
+    .hero-actions {
+      margin-top: 2rem;
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 11px 22px;
+      transition: all 0.15s;
+    }
+    .btn-accent { background: var(--accent); color: #fff; }
+    .btn-accent:hover { background: #ff5520; }
+    .btn-ghost { border: 1px solid var(--dim); color: var(--muted); }
+    .btn-ghost:hover { border-color: var(--muted); color: var(--text); }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .hero-stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.2rem;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+    }
+    .stat-num {
+      font-family: var(--serif);
+      font-weight: 800;
+      font-size: 1.8rem;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    /* ─── TICKER ─── */
+    .ticker {
+      overflow: hidden;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 0.55rem 0;
+    }
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: tickerScroll 35s linear infinite;
+    }
+    .ticker-item {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0 2.5rem;
+      white-space: nowrap;
+    }
+    .ticker-item span { color: var(--accent); }
+    @keyframes tickerScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ─── SECTION COMMONS ─── */
+    .section {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 4rem 1.75rem;
+    }
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .section-head-left {
+      display: flex;
+      align-items: baseline;
+      gap: 0.8rem;
+    }
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-top: 0.2rem;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-weight: 800;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      letter-spacing: -0.025em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+    .section-link {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.15s;
+    }
+    .section-link:hover { color: var(--text); }
+    .rule { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+    /* ─── SHOWS CONTROLS ─── */
+    .shows-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .view-toggle {
+      display: flex;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .view-toggle button {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 7px 14px;
+      color: var(--muted);
+      border-right: 1px solid var(--border);
+      transition: all 0.15s;
+    }
+    .view-toggle button:last-child { border-right: none; }
+    .view-toggle button.active { background: var(--bg3); color: var(--text); }
+    .view-toggle button:hover:not(.active) { background: var(--bg2); }
+
+    .sort-controls {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+    .sort-btn {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      transition: all 0.15s;
+    }
+    .sort-btn.active { border-color: var(--accent); color: var(--accent); }
+    .sort-btn:hover:not(.active) { border-color: var(--dim); color: var(--text); }
+
+    .filter-pills {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    .filter-pill {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--muted);
+      transition: all 0.15s;
+    }
+    .filter-pill.active { background: var(--bg3); border-color: var(--dim); color: var(--text); }
+    .filter-pill:hover:not(.active) { border-color: var(--dim); }
+
+    /* ─── CALENDAR VIEW ─── */
+    .shows-calendar { display: flex; flex-direction: column; }
+    .show-row {
+      display: grid;
+      grid-template-columns: 72px 1fr auto auto;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.12s;
+    }
+    .show-row:hover { background: rgba(255,255,255,0.02); margin: 0 -1rem; padding: 1.1rem 1rem; }
+    .show-date-col {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .show-date-col .day {
+      display: block;
+      font-family: var(--serif);
+      font-weight: 800;
+      font-size: 1.6rem;
+      line-height: 1;
+      color: var(--text);
+      letter-spacing: -0.03em;
+    }
+    .show-info-col { min-width: 0; }
+    .show-band {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+      transition: color 0.12s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .show-row:hover .show-band { color: var(--accent); }
+    .show-support {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .show-genre-tag {
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: 1px solid var(--dim);
+      padding: 2px 7px;
+      margin-left: 8px;
+      color: var(--muted);
+      vertical-align: middle;
+    }
+    .show-venue-col {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      text-align: right;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .show-venue-col strong { color: var(--text); font-weight: 400; }
+    .show-price-col {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      white-space: nowrap;
+      min-width: 50px;
+      text-align: right;
+    }
+    .price-free { color: var(--lime); }
+    .price-sold { color: var(--dim); }
+    .price-paid { color: var(--text); }
+    a.tix-link {
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 1px;
+      transition: opacity 0.15s;
+    }
+    a.tix-link:hover { opacity: 0.7; }
+    .poster-card a.poster-tix {
+      text-decoration: none;
+    }
+
+    /* ─── POSTER VIEW ─── */
+    .shows-posters {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1px;
+      background: var(--border);
+    }
+    .poster-card {
+      aspect-ratio: 2/3;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.2rem;
+    }
+    .poster-card:hover .poster-overlay { opacity: 1; }
+    .poster-bg {
+      position: absolute;
+      inset: 0;
+    }
+    .poster-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.2);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .poster-content { position: relative; z-index: 1; }
+    .poster-date {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      opacity: 0.8;
+    }
+    .poster-band {
+      font-family: var(--serif);
+      font-weight: 800;
+      font-size: 1.15rem;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.6);
+    }
+    .poster-venue {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.08em;
+      opacity: 0.75;
+      margin-top: 0.4rem;
+    }
+    .poster-price-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 4px 9px;
+      background: rgba(0,0,0,0.6);
+      letter-spacing: 0.08em;
+    }
+
+    /* Poster gradient palettes */
+    .pg-1 { background: linear-gradient(160deg, #1a0a2e 0%, #3d1260 50%, #150830 100%); color: #e0c8ff; }
+    .pg-2 { background: linear-gradient(160deg, #2a0800 0%, #7a1a00 50%, #1a0400 100%); color: #ffc8a0; }
+    .pg-3 { background: linear-gradient(160deg, #001a0d 0%, #004830 50%, #001208 100%); color: #a0ffd0; }
+    .pg-4 { background: linear-gradient(160deg, #0d1a2a 0%, #1a3d5a 50%, #080f1a 100%); color: #a8d4ff; }
+    .pg-5 { background: linear-gradient(160deg, #1a1a00 0%, #484800 50%, #0d0d00 100%); color: #f0f080; }
+    .pg-6 { background: linear-gradient(160deg, #1a0010 0%, #520032 50%, #100008 100%); color: #ffa8d4; }
+    .pg-7 { background: linear-gradient(160deg, #0a1a1a 0%, #1a4848 50%, #040d0d 100%); color: #80e8e8; }
+    .pg-8 { background: linear-gradient(160deg, #1a0d00 0%, #4a2800 50%, #0d0600 100%); color: #ffcc80; }
+
+    /* ─── PLAYLISTS ─── */
+    .playlists-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .playlist-card {
+      cursor: pointer;
+    }
+    .playlist-art {
+      aspect-ratio: 1;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 0.9rem;
+    }
+    .playlist-art-inner {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      transition: transform 0.3s;
+    }
+    .playlist-card:hover .playlist-art-inner { transform: scale(1.04); }
+    .pa-1 { background: linear-gradient(135deg, #1e0a36, #5a1a8a); }
+    .pa-2 { background: linear-gradient(135deg, #0a1e0a, #1a5a1a); }
+    .pa-3 { background: linear-gradient(135deg, #2a1400, #7a3c00); }
+    .pa-4 { background: linear-gradient(135deg, #00101e, #003050); }
+    .pa-5 { background: linear-gradient(135deg, #1e1e00, #505000); }
+    .pa-6 { background: linear-gradient(135deg, #1e000e, #5a0028); }
+    .playlist-num {
+      position: absolute;
+      bottom: 0.75rem;
+      left: 0.75rem;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      background: rgba(0,0,0,0.7);
+      padding: 3px 8px;
+    }
+    .playlist-title {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 0.95rem;
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+    .playlist-meta {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    /* ─── INTERVIEWS ─── */
+    .interviews-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .interviews-grid { grid-template-columns: 1fr 1fr; }
+      .interview-feat { grid-column: span 2; }
+    }
+    @media (max-width: 600px) {
+      .interviews-grid { grid-template-columns: 1fr; }
+      .interview-feat { grid-column: span 1; }
+    }
+    .interview-card { cursor: pointer; }
+    .interview-card:hover .interview-title { color: var(--accent); }
+    .interview-img {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .interview-feat .interview-img { aspect-ratio: 3/2; }
+    .interview-img-inner {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.4s;
+    }
+    .interview-card:hover .interview-img-inner { transform: scale(1.04); }
+    .ii-1 { background: linear-gradient(150deg, #180828 0%, #3a1060 40%, #0c0418 100%); }
+    .ii-2 { background: linear-gradient(150deg, #281400 0%, #6a3000 40%, #160a00 100%); }
+    .ii-3 { background: linear-gradient(150deg, #001824 0%, #004060 40%, #000c12 100%); }
+    .ii-4 { background: linear-gradient(150deg, #0c1c00 0%, #304800 40%, #060e00 100%); }
+
+    .interview-kicker {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .interview-title {
+      font-family: var(--serif);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      transition: color 0.15s;
+      margin-bottom: 0.5rem;
+    }
+    .interview-feat .interview-title { font-size: 1.3rem; }
+    .interview-title { font-size: 1rem; }
+    .interview-excerpt {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .interview-meta {
+      margin-top: 0.8rem;
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.08em;
+      color: var(--dim);
+    }
+
+    /* ─── WRAPS ─── */
+    .wraps-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 2px;
+    }
+    @media (max-width: 800px) { .wraps-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .wraps-grid { grid-template-columns: 1fr; } }
+
+    .wrap-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .wrap-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+    .wrap-photo {
+      width: 100%;
+      aspect-ratio: 4/3;
+      display: block;
+      transition: transform 0.4s;
+    }
+    .wrap-item:nth-child(1) .wrap-photo { aspect-ratio: 16/7; }
+    .wrap-item:hover .wrap-photo { transform: scale(1.04); }
+    .wi-1 { background: linear-gradient(135deg, #120820, #2c1848); }
+    .wi-2 { background: linear-gradient(135deg, #200c00, #501e00); }
+    .wi-3 { background: linear-gradient(135deg, #001020, #002848); }
+    .wi-4 { background: linear-gradient(135deg, #001808, #003818); }
+    .wi-5 { background: linear-gradient(135deg, #1e1800, #4a3c00); }
+    .wrap-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2rem 1rem 0.9rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+      transform: translateY(4px);
+      opacity: 0;
+      transition: all 0.2s;
+    }
+    .wrap-item:hover .wrap-caption { opacity: 1; transform: translateY(0); }
+    .wrap-event {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .wrap-date-loc {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.6);
+      margin-top: 2px;
+    }
+    .wrap-photo-count {
+      position: absolute;
+      top: 0.7rem;
+      right: 0.7rem;
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.08em;
+      background: rgba(0,0,0,0.7);
+      padding: 3px 8px;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer-rule { border: none; border-top: 1px solid var(--border); }
+    .footer {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 3rem 1.75rem 2rem;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 2rem;
+    }
+    @media (max-width: 700px) { .footer { grid-template-columns: 1fr 1fr; } }
+    .footer-brand {}
+    .footer-logo {
+      font-family: var(--serif);
+      font-weight: 800;
+      font-size: 1.3rem;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+    .footer-brand p {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 220px;
+    }
+    .footer-col h5 {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 1rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .footer-col a { font-size: 0.82rem; color: var(--muted); transition: color 0.15s; }
+    .footer-col a:hover { color: var(--text); }
+    .footer-bottom {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 1.2rem 1.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+    }
+    .footer-bottom span {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.08em;
+      color: var(--dim);
+    }
+
+    /* ─── HIDDEN UTILITY ─── */
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Ground Ears</a>
+  <ul class="nav-links">
+    <li><a href="#shows">Shows</a></li>
+    <li><a href="#playlists">Playlists</a></li>
+    <li><a href="#interviews">Interviews</a></li>
+    <li><a href="#wraps">Wraps</a></li>
+  </ul>
+  <span class="nav-pill">SLO · SB · Ventura</span>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Central Coast Underground · Est. 2025</p>
+    <h1 class="hero-title">
+      Ground<br>
+      <em>Ears</em>
+    </h1>
+    <p class="hero-desc">
+      Your guide to <strong>live music, local bands, and underground shows</strong>
+      from San Luis Obispo to Ventura — no algorithms, no ads.
+    </p>
+    <div class="hero-actions">
+      <a href="#shows" class="btn btn-accent">This Week's Shows</a>
+      <a href="#playlists" class="btn btn-ghost">Listen</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat">
+      <span class="stat-num">25+</span>
+      <span class="stat-label">shows<br>this season</span>
+    </div>
+    <div class="hero-stat">
+      <span class="stat-num">3</span>
+      <span class="stat-label">festivals<br>coming up</span>
+    </div>
+    <div class="hero-stat">
+      <span class="stat-num">9</span>
+      <span class="stat-label">venues<br>we cover</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── TICKER ── -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">Shakey Graves — Ventura Music Hall · Apr 21</span>
+    <span class="ticker-item"><span>Festival</span> — Boots &amp; Brews · Ventura · Jun 13</span>
+    <span class="ticker-item">The Heavy Heavy · SLO Brew May 13 + SoHo SB May 14</span>
+    <span class="ticker-item">Bob Dylan — Santa Barbara Bowl · Jun 17</span>
+    <span class="ticker-item">levitation room — Ojai Deer Lodge · May 1</span>
+    <span class="ticker-item"><span>Festival</span> — Ojai Music Festival · Jun 11–14</span>
+    <span class="ticker-item">Psychedelic Furs w/ We Are Scientists — Libbey Bowl · May 31</span>
+    <span class="ticker-item">Circle Jerks — Majestic Ventura Theater · May 22</span>
+    <span class="ticker-item"><span>Free</span> — Avocado Fest · Carpinteria · Oct 2–4 · 60+ bands</span>
+    <span class="ticker-item">Unknown Mortal Orchestra — Ventura Music Hall · May 19</span>
+    <span class="ticker-item">Submit your band → groundears.com/radar</span>
+    <span class="ticker-item">Shakey Graves — Ventura Music Hall · Apr 21</span>
+    <span class="ticker-item"><span>Festival</span> — Boots &amp; Brews · Ventura · Jun 13</span>
+    <span class="ticker-item">The Heavy Heavy · SLO Brew May 13 + SoHo SB May 14</span>
+    <span class="ticker-item">Bob Dylan — Santa Barbara Bowl · Jun 17</span>
+    <span class="ticker-item">levitation room — Ojai Deer Lodge · May 1</span>
+    <span class="ticker-item"><span>Festival</span> — Ojai Music Festival · Jun 11–14</span>
+    <span class="ticker-item">Psychedelic Furs w/ We Are Scientists — Libbey Bowl · May 31</span>
+    <span class="ticker-item">Circle Jerks — Majestic Ventura Theater · May 22</span>
+    <span class="ticker-item"><span>Free</span> — Avocado Fest · Carpinteria · Oct 2–4 · 60+ bands</span>
+    <span class="ticker-item">Unknown Mortal Orchestra — Ventura Music Hall · May 19</span>
+    <span class="ticker-item">Submit your band → groundears.com/radar</span>
+  </div>
+</div>
+
+<!-- ── SHOWS ── -->
+<div class="section" id="shows">
+  <div class="section-head">
+    <div class="section-head-left">
+      <h2 class="section-title">Shows</h2>
+      <span class="section-label">/ 32 upcoming</span>
+    </div>
+    <a href="#" class="section-link">View all →</a>
+  </div>
+
+  <div class="shows-controls">
+    <div class="view-toggle">
+      <button class="active" id="btn-calendar" onclick="setView('calendar')">Calendar</button>
+      <button id="btn-poster" onclick="setView('poster')">Posters</button>
+    </div>
+    <div class="sort-controls">
+      <button class="sort-btn active" onclick="setSort('date', this)">Date</button>
+      <button class="sort-btn" onclick="setSort('venue', this)">Venue</button>
+      <button class="sort-btn" onclick="setSort('location', this)">Location</button>
+      <button class="sort-btn" onclick="setSort('genre', this)">Genre</button>
+    </div>
+  </div>
+
+  <div class="filter-pills">
+    <button class="filter-pill active" onclick="setFilter('all', this)">All</button>
+    <button class="filter-pill" onclick="setFilter('SLO', this)">San Luis Obispo</button>
+    <button class="filter-pill" onclick="setFilter('Morro Bay', this)">Morro Bay</button>
+    <button class="filter-pill" onclick="setFilter('SB', this)">Santa Barbara</button>
+    <button class="filter-pill" onclick="setFilter('Ojai', this)">Ojai</button>
+    <button class="filter-pill" onclick="setFilter('Ventura', this)">Ventura</button>
+  </div>
+
+  <hr class="rule" style="margin-bottom:1.5rem">
+
+  <!-- CALENDAR VIEW -->
+  <div id="view-calendar" class="shows-calendar">
+    <!-- js rendered -->
+  </div>
+
+  <!-- POSTER VIEW -->
+  <div id="view-poster" class="shows-posters hidden">
+    <!-- js rendered -->
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- ── PLAYLISTS ── -->
+<div class="section" id="playlists">
+  <div class="section-head">
+    <div class="section-head-left">
+      <h2 class="section-title">Playlists</h2>
+      <span class="section-label">/ curated</span>
+    </div>
+    <a href="#" class="section-link">All playlists →</a>
+  </div>
+  <div class="playlists-grid">
+
+    <div class="playlist-card">
+      <div class="playlist-art">
+        <div class="playlist-art-inner pa-1">🌊</div>
+        <span class="playlist-num">24 tracks · 1h 22m</span>
+      </div>
+      <div class="playlist-title">The Central Coast Starter Pack</div>
+      <div class="playlist-meta">Essential local acts · Updated Apr 2026</div>
+    </div>
+
+    <div class="playlist-card">
+      <div class="playlist-art">
+        <div class="playlist-art-inner pa-2">🌅</div>
+        <span class="playlist-num">18 tracks · 58m</span>
+      </div>
+      <div class="playlist-title">Sunset Drive on Hwy 1</div>
+      <div class="playlist-meta">Mellow indie / dream pop · Apr 2026</div>
+    </div>
+
+    <div class="playlist-card">
+      <div class="playlist-art">
+        <div class="playlist-art-inner pa-3">🌲</div>
+        <span class="playlist-num">31 tracks · 2h 10m</span>
+      </div>
+      <div class="playlist-title">Pit Season — Spring Shows</div>
+      <div class="playlist-meta">Loud &amp; live picks · Mar/Apr 2026</div>
+    </div>
+
+    <div class="playlist-card">
+      <div class="playlist-art">
+        <div class="playlist-art-inner pa-4">🎙</div>
+        <span class="playlist-num">12 tracks · 44m</span>
+      </div>
+      <div class="playlist-title">New Locals: April Radar</div>
+      <div class="playlist-meta">Freshest drops from the 805 · This month</div>
+    </div>
+
+    <div class="playlist-card">
+      <div class="playlist-art">
+        <div class="playlist-art-inner pa-5">🏜</div>
+        <span class="playlist-num">22 tracks · 1h 35m</span>
+      </div>
+      <div class="playlist-title">Paso Desert Blues</div>
+      <div class="playlist-meta">Psych &amp; slow burn · Paso Robles sessions</div>
+    </div>
+
+    <div class="playlist-card">
+      <div class="playlist-art">
+        <div class="playlist-art-inner pa-6">🌙</div>
+        <span class="playlist-num">16 tracks · 1h 8m</span>
+      </div>
+      <div class="playlist-title">Late Night Santa Barbara</div>
+      <div class="playlist-meta">Post-show cool-down · After midnight vibes</div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- ── INTERVIEWS ── -->
+<div class="section" id="interviews">
+  <div class="section-head">
+    <div class="section-head-left">
+      <h2 class="section-title">Interviews</h2>
+      <span class="section-label">/ in depth</span>
+    </div>
+    <a href="#" class="section-link">All interviews →</a>
+  </div>
+  <div class="interviews-grid">
+
+    <div class="interview-card interview-feat">
+      <div class="interview-img">
+        <div class="interview-img-inner ii-1"></div>
+      </div>
+      <div class="interview-kicker">Cover Story</div>
+      <div class="interview-title">
+        Levitation Room have been chasing a sound since high school. Playing the Deer Lodge on May 1st, they're closer than ever.
+      </div>
+      <div class="interview-excerpt">
+        Formed in Ojai around a mutual love of '60s garage rock played with a psychedelic twist, Julian Porte, Gabriel Fernandez, Jonathan Martin, and Kevin Perez have been quietly building one of the most compelling sounds on the Central Coast. We talked to them about growing up in the 805, the influence of the valley's landscape on their music, and what it means to stay DIY when labels come calling. Their Deer Lodge show May 1st is a must.
+      </div>
+      <div class="interview-meta">Apr 17, 2026 · 7 min read · via Psychedelic Scene Magazine</div>
+    </div>
+
+    <div class="interview-card">
+      <div class="interview-img">
+        <div class="interview-img-inner ii-2"></div>
+      </div>
+      <div class="interview-kicker">Band Profile</div>
+      <div class="interview-title">Maclovia: The Ojai band bringing Latin rock and psych to the Central Coast underground</div>
+      <div class="interview-excerpt">Vocalist Vanessa Jimenez, guitarist Greg Jimenez, and the rest of Maclovia forged their sound between Tepatitlán and Ojai — and the contrast shows.</div>
+      <div class="interview-meta">Apr 10, 2026 · 5 min read · via VC Reporter</div>
+    </div>
+
+    <div class="interview-card">
+      <div class="interview-img">
+        <div class="interview-img-inner ii-3"></div>
+      </div>
+      <div class="interview-kicker">Venue Spotlight</div>
+      <div class="interview-title">The Siren in Morro Bay is the small room the Central Coast didn't know it needed</div>
+      <div class="interview-excerpt">Intimate, loud, and right on the bay. How a 150-cap room in Morro Bay became one of the region's most important stages.</div>
+      <div class="interview-meta">Apr 3, 2026 · 4 min read</div>
+    </div>
+
+    <div class="interview-card">
+      <div class="interview-img">
+        <div class="interview-img-inner ii-4"></div>
+      </div>
+      <div class="interview-kicker">Scene Report</div>
+      <div class="interview-title">Salty Strings, Stereo Chickens &amp; the new wave of 805 originals you should know</div>
+      <div class="interview-excerpt">From Santa Barbara bluegrass to SLO Americana — the local originals making noise in 2026, including New Times SLO's picks for bands to watch.</div>
+      <div class="interview-meta">Mar 28, 2026 · 6 min read · via New Times SLO</div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- ── WRAPS ── -->
+<div class="section" id="wraps">
+  <div class="section-head">
+    <div class="section-head-left">
+      <h2 class="section-title">Wraps</h2>
+      <span class="section-label">/ show photos</span>
+    </div>
+    <a href="#" class="section-link">All wraps →</a>
+  </div>
+
+  <div class="wraps-grid">
+
+    <div class="wrap-item">
+      <div class="wrap-photo wi-1"></div>
+      <span class="wrap-photo-count">28 photos</span>
+      <div class="wrap-caption">
+        <div class="wrap-event">The Fronds @ SLO Brew Rock</div>
+        <div class="wrap-date-loc">Apr 12, 2026 · San Luis Obispo</div>
+      </div>
+    </div>
+
+    <div class="wrap-item">
+      <div class="wrap-photo wi-2"></div>
+      <span class="wrap-photo-count">14 photos</span>
+      <div class="wrap-caption">
+        <div class="wrap-event">Velvet Fault @ Frog &amp; Peach</div>
+        <div class="wrap-date-loc">Apr 8, 2026 · San Luis Obispo</div>
+      </div>
+    </div>
+
+    <div class="wrap-item">
+      <div class="wrap-photo wi-3"></div>
+      <span class="wrap-photo-count">19 photos</span>
+      <div class="wrap-caption">
+        <div class="wrap-event">Ghost Pines @ SoHo Music Club</div>
+        <div class="wrap-date-loc">Apr 2, 2026 · Santa Barbara</div>
+      </div>
+    </div>
+
+    <div class="wrap-item">
+      <div class="wrap-photo wi-4"></div>
+      <span class="wrap-photo-count">11 photos</span>
+      <div class="wrap-caption">
+        <div class="wrap-event">Moonslide @ Discovery Ventura</div>
+        <div class="wrap-date-loc">Mar 22, 2026 · Ventura</div>
+      </div>
+    </div>
+
+    <div class="wrap-item">
+      <div class="wrap-photo wi-5"></div>
+      <span class="wrap-photo-count">22 photos</span>
+      <div class="wrap-caption">
+        <div class="wrap-event">Chorro Creek @ Tooth &amp; Nail</div>
+        <div class="wrap-date-loc">Mar 15, 2026 · Paso Robles</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<hr class="footer-rule">
+<div class="footer">
+  <div class="footer-brand">
+    <span class="footer-logo">Ground Ears</span>
+    <p>Independent coverage of live music and underground culture on California's Central Coast. No algorithms. No ads. Just the scene.</p>
+  </div>
+  <div class="footer-col">
+    <h5>Navigate</h5>
+    <ul>
+      <li><a href="#shows">Upcoming Shows</a></li>
+      <li><a href="#playlists">Playlists</a></li>
+      <li><a href="#interviews">Interviews</a></li>
+      <li><a href="#wraps">Wraps</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h5>Community</h5>
+    <ul>
+      <li><a href="#">Submit Your Band</a></li>
+      <li><a href="#">List a Show</a></li>
+      <li><a href="#">Newsletter</a></li>
+      <li><a href="#">Write for Us</a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h5>Social</h5>
+    <ul>
+      <li><a href="#">Instagram</a></li>
+      <li><a href="#">Spotify</a></li>
+      <li><a href="#">TikTok</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+</div>
+<div class="footer-bottom">
+  <span>© 2026 Ground Ears — SLO · SB · Ventura</span>
+  <span>Made on the Central Coast</span>
+</div>
+
+<!-- ── JAVASCRIPT ── -->
+<script>
+  /* ── Data ── */
+  const shows = [
+    // ── APRIL ──
+    { day:"21", month:"APR", weekday:"TUE", band:"Shakey Graves", support:"w/ Jobi Riccio", genre:"Americana", venue:"Ventura Music Hall", location:"Ventura", price:"Tix", priceType:"paid", tag:"", url:"https://venturamusichall.com/events" },
+    { day:"24", month:"APR", weekday:"FRI", band:"The Blurry Stars", support:"", genre:"Rock", venue:"Ojai Deer Lodge", location:"Ojai", price:"Tix", priceType:"paid", tag:"", url:"https://www.deerlodgeojai.com/live-music" },
+    { day:"24", month:"APR", weekday:"FRI", band:"Brass Mash", support:"", genre:"Jazz / Funk", venue:"The Siren", location:"Morro Bay", price:"Tix", priceType:"paid", tag:"", url:"https://www.tixr.com/groups/thesiren/events/brass-mash-119683" },
+    { day:"25", month:"APR", weekday:"SAT", band:"Charlie Puth", support:"w/ Daniel Seavey & Ally Salort", genre:"Pop", venue:"Santa Barbara Bowl", location:"SB", price:"$56+", priceType:"paid", tag:"", url:"https://www.axs.com/events/1286431/charlie-puth-tickets" },
+    { day:"26", month:"APR", weekday:"SUN", band:"Cactus Lee", support:"", genre:"Country", venue:"Ojai Deer Lodge", location:"Ojai", price:"Tix", priceType:"paid", tag:"", url:"https://www.deerlodgeojai.com/live-music" },
+    { day:"26", month:"APR", weekday:"SUN", band:"KoMaGa Trio", support:"Presented by SB Acoustic", genre:"World / Jazz", venue:"SOhO Music Club", location:"SB", price:"Tix", priceType:"paid", tag:"", url:"https://www.sohosb.com/events/sb-acoustic-presents-komaga-trio-soho-music-club" },
+    // ── MAY ──
+    { day:"01", month:"MAY", weekday:"FRI", band:"levitation room", support:"w/ Queentide", genre:"Psych Rock", venue:"Ojai Deer Lodge", location:"Ojai", price:"Tix", priceType:"paid", tag:"", url:"https://www.eventbrite.com/e/levitation-room-deer-lodge-ojai-51-tickets-1984406076995" },
+    { day:"01", month:"MAY", weekday:"FRI", band:"Surfer Girl", support:"+ Doublecamp, Dylan Cotrone", genre:"Surf / Indie", venue:"SLO Brew Rock", location:"SLO", price:"$29+", priceType:"paid", tag:"", url:"https://www.ticketweb.com/event/surfer-girl-doublecamp-dylan-cotrone-slo-brew-rock-tickets/14095724" },
+    { day:"02", month:"MAY", weekday:"SAT", band:"Candy-O", support:"Tribute to The Cars", genre:"New Wave / Tribute", venue:"The Siren", location:"Morro Bay", price:"Tix", priceType:"paid", tag:"", url:"https://thesirenmorrobay.com/events/list/" },
+    { day:"06", month:"MAY", weekday:"WED", band:"James Taylor & His All-Star Band", support:"", genre:"Rock / Folk", venue:"Santa Barbara Bowl", location:"SB", price:"Tix", priceType:"paid", tag:"", url:"https://www.axs.com/events/1273553/james-taylor-his-all-star-band-tickets" },
+    { day:"07", month:"MAY", weekday:"THU", band:"Flight of the Conchords", support:"", genre:"Comedy / Folk", venue:"Santa Barbara Bowl", location:"SB", price:"$56+", priceType:"paid", tag:"", url:"https://www.axs.com/events/1354210/flight-of-the-conchords-tickets" },
+    { day:"07", month:"MAY", weekday:"THU", band:"Glen Phillips", support:"w/ Garrison Starr", genre:"Folk / Indie", venue:"The Siren", location:"Morro Bay", price:"Tix", priceType:"paid", tag:"", url:"https://tickets.goodmedicinepresents.com/e/glen-phillips" },
+    { day:"13", month:"MAY", weekday:"WED", band:"The Heavy Heavy", support:"w/ Lou Hazel", genre:"Psych Pop", venue:"SLO Brew Rock", location:"SLO", price:"$32", priceType:"paid", tag:"", url:"https://www.ticketweb.com/event/slo-brew-live-folkyeah-slo-brew-rock-tickets/14132634" },
+    { day:"14", month:"MAY", weekday:"THU", band:"The Heavy Heavy", support:"w/ Lou Hazel", genre:"Psych Pop", venue:"SOhO Music Club", location:"SB", price:"Tix", priceType:"paid", tag:"", url:"https://tickets.sohosb.com/" },
+    { day:"14", month:"MAY", weekday:"THU", band:"Electric Six", support:"", genre:"Rock / Dance", venue:"The Siren", location:"Morro Bay", price:"Tix", priceType:"paid", tag:"", url:"https://thesirenmorrobay.com/events/list/" },
+    { day:"14", month:"MAY", weekday:"THU", band:"Whitey Morgan & The 78s", support:"", genre:"Outlaw Country", venue:"Majestic Ventura Theater", location:"Ventura", price:"$42", priceType:"paid", tag:"", url:"https://www.venturatheater.net/calendar/" },
+    { day:"19", month:"MAY", weekday:"TUE", band:"Unknown Mortal Orchestra", support:"w/ Elliot & Vincent", genre:"Psychedelic / Indie", venue:"Ventura Music Hall", location:"Ventura", price:"$69+", priceType:"paid", tag:"", url:"https://venturamusichall.com/events" },
+    { day:"22", month:"MAY", weekday:"FRI", band:"Circle Jerks", support:"w/ Gorilla Biscuits & 7Seconds", genre:"Punk", venue:"Majestic Ventura Theater", location:"Ventura", price:"$65+", priceType:"paid", tag:"", url:"https://www.ticketweb.com/event/circle-jerks-with-special-guest-ventura-theater-tickets/14119484" },
+    { day:"31", month:"MAY", weekday:"SUN", band:"The Psychedelic Furs", support:"w/ We Are Scientists", genre:"Post-Punk / New Wave", venue:"Libbey Bowl", location:"Ojai", price:"$79+", priceType:"paid", tag:"", url:"https://www.ticketmaster.com/the-psychedelic-furs-ojai-california-05-31-2026/event/090064468A013EAB" },
+    { day:"31", month:"MAY", weekday:"SUN", band:"Cubensis", support:"w/ Stu Allen", genre:"Jam / Grateful Dead", venue:"SLO Brew Rock", location:"SLO", price:"$29", priceType:"paid", tag:"", url:"https://slobrew.com/events/" },
+    // ── JUNE ──
+    { day:"02", month:"JUN", weekday:"TUE", band:"Lord Huron", support:"w/ FIGHTMASTER", genre:"Indie Folk", venue:"Santa Barbara Bowl", location:"SB", price:"$77+", priceType:"paid", tag:"", url:"https://www.axs.com/events/1290210/lord-huron-tickets" },
+    { day:"02", month:"JUN", weekday:"TUE", band:"Thievery Corporation", support:"30th Anniversary Tour", genre:"Electronic / Dub", venue:"Ventura Music Hall", location:"Ventura", price:"Tix", priceType:"paid", tag:"", url:"https://www.ticketmaster.com/event/Z7r9jZ1A7-YOx" },
+    { day:"03", month:"JUN", weekday:"WED", band:"Agent Orange", support:"", genre:"Punk / Surf", venue:"SOhO Music Club", location:"SB", price:"Tix", priceType:"paid", tag:"", url:"https://tickets.sohosb.com/" },
+    { day:"11", month:"JUN", weekday:"THU", band:"Ojai Music Festival", support:"80th edition · Dir. Esa-Pekka Salonen · Jun 11–14", genre:"Classical / Contemporary", venue:"Libbey Bowl", location:"Ojai", price:"Tix", priceType:"paid", tag:"festival", url:"https://ojaifestival.my.salesforce-sites.com/ticket/" },
+    { day:"13", month:"JUN", weekday:"SAT", band:"The Black Keys", support:"w/ Fai Laci · Peaches 'n Kream Tour", genre:"Blues Rock", venue:"Santa Barbara Bowl", location:"SB", price:"$76+", priceType:"paid", tag:"", url:"https://www.axs.com/events/1317895/the-black-keys-tickets" },
+    { day:"13", month:"JUN", weekday:"SAT", band:"Boots & Brews Country Fest", support:"Cole Swindell · Gretchen Wilson · Lanco", genre:"Country / Festival", venue:"Ventura County Fairgrounds", location:"Ventura", price:"Tix", priceType:"paid", tag:"festival", url:"https://cbfproductions.ticketspice.com/boots-brews-ventura-june-2026" },
+    { day:"17", month:"JUN", weekday:"WED", band:"Bob Dylan", support:"w/ Lucinda Williams & The John Doe Folk Trio", genre:"Folk / Rock", venue:"Santa Barbara Bowl", location:"SB", price:"$63+", priceType:"paid", tag:"", url:"https://www.axs.com/events/1382240/bob-dylan-tickets" },
+    { day:"27", month:"JUN", weekday:"SAT", band:"The Ultimate Doors", support:"Tribute to The Doors", genre:"Classic Rock / Tribute", venue:"SLO Brew Rock", location:"SLO", price:"$29", priceType:"paid", tag:"", url:"https://slobrew.com/events/" },
+    // ── JULY ──
+    { day:"09", month:"JUL", weekday:"THU", band:"High Fade", support:"w/ Turning Jane", genre:"Indie Rock", venue:"SLO Brew Rock", location:"SLO", price:"$27", priceType:"paid", tag:"", url:"https://slobrew.com/events/" },
+    { day:"18", month:"JUL", weekday:"SAT", band:"Young the Giant", support:"w/ Cold War Kids & KennyHoopla", genre:"Indie Rock", venue:"Santa Barbara Bowl", location:"SB", price:"$51+", priceType:"paid", tag:"", url:"https://www.axs.com/events/1317909/young-the-giant-tickets" },
+    { day:"19", month:"JUL", weekday:"SUN", band:"Rainbow Kitten Surprise", support:"w/ Spacey Jane", genre:"Indie Folk", venue:"Santa Barbara Bowl", location:"SB", price:"$83+", priceType:"paid", tag:"", url:"https://www.axs.com/events/1192963/rainbow-kitten-surprise-tickets" },
+    // ── OCTOBER ──
+    { day:"02", month:"OCT", weekday:"FRI", band:"California Avocado Festival", support:"60+ bands across 3 stages · Oct 2–4", genre:"Multi-genre / Festival", venue:"Downtown Carpinteria", location:"SB", price:"Free", priceType:"free", tag:"festival", url:"https://www.avofest.org/" },
+  ];
+
+  const posterPalettes = ["pg-1","pg-2","pg-3","pg-4","pg-5","pg-6","pg-7","pg-8"];
+
+  let currentView    = "calendar";
+  let currentSort    = "date";
+  let currentFilter  = "all";
+
+  /* ── Render ── */
+  function getFiltered() {
+    return shows.filter(s => {
+      if (currentFilter === "all") return true;
+      return s.location === currentFilter;
+    });
+  }
+
+  function getSorted(arr) {
+    const copy = [...arr];
+    if (currentSort === "date")     return copy; // default order = date order
+    if (currentSort === "venue")    return copy.sort((a,b) => a.venue.localeCompare(b.venue));
+    if (currentSort === "location") return copy.sort((a,b) => a.location.localeCompare(b.location));
+    if (currentSort === "genre")    return copy.sort((a,b) => a.genre.localeCompare(b.genre));
+    return copy;
+  }
+
+  function renderCalendar(data) {
+    const el = document.getElementById("view-calendar");
+    el.innerHTML = data.map(s => {
+      const priceEl = s.priceType === "free"
+        ? `<span class="price-free">${s.price}</span>`
+        : s.priceType === "sold"
+        ? `<span class="price-sold">${s.price}</span>`
+        : `<a class="tix-link price-paid" href="${s.url}" target="_blank" rel="noopener">${s.price} →</a>`;
+      return `
+      <div class="show-row">
+        <div class="show-date-col">
+          <span class="day">${s.day}</span>
+          ${s.month} · ${s.weekday}
+        </div>
+        <div class="show-info-col">
+          <div class="show-band">
+            ${s.band}
+            <span class="show-genre-tag">${s.genre}</span>
+          </div>
+          <div class="show-support">${s.support}</div>
+        </div>
+        <div class="show-venue-col">
+          <strong>${s.venue}</strong><br>${s.location}
+        </div>
+        <div class="show-price-col">${priceEl}</div>
+      </div>`;
+    }).join("");
+  }
+
+  function renderPosters(data) {
+    const el = document.getElementById("view-poster");
+    el.innerHTML = data.map((s, i) => `
+      <a class="poster-card ${posterPalettes[i % 8]}" href="${s.url}" target="_blank" rel="noopener" style="text-decoration:none;">
+        <div class="poster-bg"></div>
+        <div class="poster-overlay"></div>
+        <span class="poster-price-badge">${s.price}</span>
+        <div class="poster-content">
+          <div class="poster-date">${s.day} ${s.month} · ${s.location}</div>
+          <div class="poster-band">${s.band}</div>
+          <div class="poster-venue">${s.venue}</div>
+        </div>
+      </a>
+    `).join("");
+  }
+
+  function render() {
+    const data = getSorted(getFiltered());
+    renderCalendar(data);
+    renderPosters(data);
+  }
+
+  /* ── Controls ── */
+  function setView(v) {
+    currentView = v;
+    document.getElementById("view-calendar").classList.toggle("hidden", v !== "calendar");
+    document.getElementById("view-poster").classList.toggle("hidden",   v !== "poster");
+    document.getElementById("btn-calendar").classList.toggle("active",  v === "calendar");
+    document.getElementById("btn-poster").classList.toggle("active",    v === "poster");
+  }
+
+  function setSort(s, btn) {
+    currentSort = s;
+    document.querySelectorAll(".sort-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    render();
+  }
+
+  function setFilter(f, btn) {
+    currentFilter = f;
+    document.querySelectorAll(".filter-pill").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    render();
+  }
+
+  /* ── Init ── */
+  render();
+</script>
+
+</body>
+</html>

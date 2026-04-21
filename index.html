@@ -212,7 +212,10 @@
       color: var(--muted);
       padding: 0 2.5rem;
       white-space: nowrap;
+      text-decoration: none;
+      transition: color 0.15s;
     }
+    a.ticker-item:hover { color: var(--text); }
     .ticker-item span { color: var(--accent); }
     @keyframes tickerScroll {
       from { transform: translateX(0); }
@@ -816,28 +819,30 @@
 <!-- ── TICKER ── -->
 <div class="ticker">
   <div class="ticker-track">
-    <span class="ticker-item">Shakey Graves — Ventura Music Hall · Apr 21</span>
-    <span class="ticker-item"><span>Festival</span> — Boots &amp; Brews · Ventura · Jun 13</span>
-    <span class="ticker-item">The Heavy Heavy · SLO Brew May 13 + SoHo SB May 14</span>
-    <span class="ticker-item">Bob Dylan — Santa Barbara Bowl · Jun 17</span>
-    <span class="ticker-item">levitation room — Ojai Deer Lodge · May 1</span>
-    <span class="ticker-item"><span>Festival</span> — Ojai Music Festival · Jun 11–14</span>
-    <span class="ticker-item">Psychedelic Furs w/ We Are Scientists — Libbey Bowl · May 31</span>
-    <span class="ticker-item">Circle Jerks — Majestic Ventura Theater · May 22</span>
-    <span class="ticker-item"><span>Free</span> — Avocado Fest · Carpinteria · Oct 2–4 · 60+ bands</span>
-    <span class="ticker-item">Unknown Mortal Orchestra — Ventura Music Hall · May 19</span>
-    <span class="ticker-item">Submit your band → groundears.com/radar</span>
-    <span class="ticker-item">Shakey Graves — Ventura Music Hall · Apr 21</span>
-    <span class="ticker-item"><span>Festival</span> — Boots &amp; Brews · Ventura · Jun 13</span>
-    <span class="ticker-item">The Heavy Heavy · SLO Brew May 13 + SoHo SB May 14</span>
-    <span class="ticker-item">Bob Dylan — Santa Barbara Bowl · Jun 17</span>
-    <span class="ticker-item">levitation room — Ojai Deer Lodge · May 1</span>
-    <span class="ticker-item"><span>Festival</span> — Ojai Music Festival · Jun 11–14</span>
-    <span class="ticker-item">Psychedelic Furs w/ We Are Scientists — Libbey Bowl · May 31</span>
-    <span class="ticker-item">Circle Jerks — Majestic Ventura Theater · May 22</span>
-    <span class="ticker-item"><span>Free</span> — Avocado Fest · Carpinteria · Oct 2–4 · 60+ bands</span>
-    <span class="ticker-item">Unknown Mortal Orchestra — Ventura Music Hall · May 19</span>
-    <span class="ticker-item">Submit your band → groundears.com/radar</span>
+    <a class="ticker-item" href="https://venturamusichall.com/events" target="_blank" rel="noopener">Shakey Graves — Ventura Music Hall · Apr 21</a>
+    <a class="ticker-item" href="https://shabangslo.com/tickets/" target="_blank" rel="noopener"><span>Festival</span> — Shabang · SLO · May 2–3</a>
+    <a class="ticker-item" href="https://cbfproductions.ticketspice.com/boots-brews-ventura-june-2026" target="_blank" rel="noopener"><span>Festival</span> — Boots &amp; Brews · Ventura · Jun 13</a>
+    <a class="ticker-item" href="https://www.ticketweb.com/event/slo-brew-live-folkyeah-slo-brew-rock-tickets/14132634" target="_blank" rel="noopener">The Heavy Heavy · SLO Brew May 13 + SoHo SB May 14</a>
+    <a class="ticker-item" href="https://www.axs.com/events/1382240/bob-dylan-tickets" target="_blank" rel="noopener">Bob Dylan — Santa Barbara Bowl · Jun 17</a>
+    <a class="ticker-item" href="https://www.eventbrite.com/e/levitation-room-deer-lodge-ojai-51-tickets-1984406076995" target="_blank" rel="noopener">levitation room — Ojai Deer Lodge · May 1</a>
+    <a class="ticker-item" href="https://ojaifestival.my.salesforce-sites.com/ticket/" target="_blank" rel="noopener"><span>Festival</span> — Ojai Music Festival · Jun 11–14</a>
+    <a class="ticker-item" href="https://www.ticketmaster.com/the-psychedelic-furs-ojai-california-05-31-2026/event/090064468A013EAB" target="_blank" rel="noopener">Psychedelic Furs w/ We Are Scientists — Libbey Bowl · May 31</a>
+    <a class="ticker-item" href="https://www.ticketweb.com/event/circle-jerks-with-special-guest-ventura-theater-tickets/14119484" target="_blank" rel="noopener">Circle Jerks — Majestic Ventura Theater · May 22</a>
+    <a class="ticker-item" href="https://www.avofest.org/" target="_blank" rel="noopener"><span>Free</span> — Avocado Fest · Carpinteria · Oct 2–4 · 60+ bands</a>
+    <a class="ticker-item" href="https://venturamusichall.com/events" target="_blank" rel="noopener">Unknown Mortal Orchestra — Ventura Music Hall · May 19</a>
+    <span class="ticker-item">Submit your show → groundears.com/radar</span>
+    <a class="ticker-item" href="https://venturamusichall.com/events" target="_blank" rel="noopener">Shakey Graves — Ventura Music Hall · Apr 21</a>
+    <a class="ticker-item" href="https://shabangslo.com/tickets/" target="_blank" rel="noopener"><span>Festival</span> — Shabang · SLO · May 2–3</a>
+    <a class="ticker-item" href="https://cbfproductions.ticketspice.com/boots-brews-ventura-june-2026" target="_blank" rel="noopener"><span>Festival</span> — Boots &amp; Brews · Ventura · Jun 13</a>
+    <a class="ticker-item" href="https://www.ticketweb.com/event/slo-brew-live-folkyeah-slo-brew-rock-tickets/14132634" target="_blank" rel="noopener">The Heavy Heavy · SLO Brew May 13 + SoHo SB May 14</a>
+    <a class="ticker-item" href="https://www.axs.com/events/1382240/bob-dylan-tickets" target="_blank" rel="noopener">Bob Dylan — Santa Barbara Bowl · Jun 17</a>
+    <a class="ticker-item" href="https://www.eventbrite.com/e/levitation-room-deer-lodge-ojai-51-tickets-1984406076995" target="_blank" rel="noopener">levitation room — Ojai Deer Lodge · May 1</a>
+    <a class="ticker-item" href="https://ojaifestival.my.salesforce-sites.com/ticket/" target="_blank" rel="noopener"><span>Festival</span> — Ojai Music Festival · Jun 11–14</a>
+    <a class="ticker-item" href="https://www.ticketmaster.com/the-psychedelic-furs-ojai-california-05-31-2026/event/090064468A013EAB" target="_blank" rel="noopener">Psychedelic Furs w/ We Are Scientists — Libbey Bowl · May 31</a>
+    <a class="ticker-item" href="https://www.ticketweb.com/event/circle-jerks-with-special-guest-ventura-theater-tickets/14119484" target="_blank" rel="noopener">Circle Jerks — Majestic Ventura Theater · May 22</a>
+    <a class="ticker-item" href="https://www.avofest.org/" target="_blank" rel="noopener"><span>Free</span> — Avocado Fest · Carpinteria · Oct 2–4 · 60+ bands</a>
+    <a class="ticker-item" href="https://venturamusichall.com/events" target="_blank" rel="noopener">Unknown Mortal Orchestra — Ventura Music Hall · May 19</a>
+    <span class="ticker-item">Submit your show → groundears.com/radar</span>
   </div>
 </div>
 
@@ -846,7 +851,7 @@
   <div class="section-head">
     <div class="section-head-left">
       <h2 class="section-title">Shows</h2>
-      <span class="section-label">/ 32 upcoming</span>
+      <span class="section-label">/ 33 upcoming</span>
     </div>
     <a href="#" class="section-link">View all →</a>
   </div>
@@ -900,38 +905,45 @@
   <div class="playlists-grid">
 
     <div class="playlist-card">
-      <div class="playlist-genre">Folk / Americana</div>
-      <iframe src="https://open.spotify.com/embed/playlist/2Y501jVxOKEGN0tqeNXa3M?utm_source=generator" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-      <div class="playlist-title">Alternate Folk</div>
-      <div class="playlist-meta">Dark folk · Americana · Southern Gothic · 213 tracks</div>
+      <div class="playlist-genre">Folk / Indie Folk</div>
+      <iframe src="https://open.spotify.com/embed/playlist/2MsGtroclirkNnI6snEoxk?utm_source=generator" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <div class="playlist-title">Indie Folk 2026</div>
+      <div class="playlist-meta">Curated by Indie Folk Central · 100 tracks · 65K saves</div>
     </div>
 
     <div class="playlist-card">
       <div class="playlist-genre">Deep House</div>
-      <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX2TRYkJECvfC?utm_source=generator" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-      <div class="playlist-title">Deep House Relax</div>
-      <div class="playlist-meta">Spotify Editorial · 3.4M saves</div>
+      <iframe src="https://open.spotify.com/embed/playlist/58IsAtVr3REtD4x6gV1TNT?utm_source=generator" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <div class="playlist-title">90s Underground Deep House</div>
+      <div class="playlist-meta">Vintage underground curation · 309 tracks · 11K saves</div>
     </div>
 
     <div class="playlist-card">
       <div class="playlist-genre">Indie Rock</div>
-      <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX2sUQwD7tbmL?utm_source=generator" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-      <div class="playlist-title">Feel-Good Indie Rock</div>
-      <div class="playlist-meta">Spotify Editorial · 2.3M saves</div>
+      <iframe src="https://open.spotify.com/embed/playlist/3GovsX6fNJfaFazt4nTr9s?utm_source=generator" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <div class="playlist-title">Indie Underground</div>
+      <div class="playlist-meta">Curated by Amanita Tunes · 324 tracks</div>
     </div>
 
     <div class="playlist-card">
       <div class="playlist-genre">Deep House</div>
-      <iframe src="https://open.spotify.com/embed/playlist/5h1oEk4W9KVMHkOd8WWWlC?utm_source=generator" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-      <div class="playlist-title">Deep House 2026</div>
-      <div class="playlist-meta">Electronic dance hits &amp; remixes · 866K saves</div>
+      <iframe src="https://open.spotify.com/embed/playlist/7f8zluP5kOxwXyLH9jcIy6?utm_source=generator" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <div class="playlist-title">Underground House 2025</div>
+      <div class="playlist-meta">Curated by Poison Ghost · 47 tracks · 18K saves</div>
     </div>
 
     <div class="playlist-card">
-      <div class="playlist-genre">Metal</div>
-      <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX9qNs32fujYe?utm_source=generator" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-      <div class="playlist-title">Heavy Metal</div>
-      <div class="playlist-meta">Spotify Editorial · 1.4M saves</div>
+      <div class="playlist-genre">Metal / Doom / Sludge</div>
+      <iframe src="https://open.spotify.com/embed/playlist/2t2G7qZgmLObQcD7lXsCHL?utm_source=generator" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <div class="playlist-title">Blackened Doom &amp; Sludge Metal</div>
+      <div class="playlist-meta">Curated by arcticdrones · 54 tracks · underground</div>
+    </div>
+
+    <div class="playlist-card">
+      <div class="playlist-genre">Psych / Surf / Garage</div>
+      <iframe src="https://open.spotify.com/embed/playlist/03PnQPllfXjDD6J6C0rT3B?utm_source=generator" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <div class="playlist-title">Garage / Surf / Psych Rock</div>
+      <div class="playlist-meta">Curated by Jack Bush · 441 tracks · Central Coast approved</div>
     </div>
 
   </div>
@@ -1128,6 +1140,7 @@
     // ── MAY ──
     { day:"01", month:"MAY", weekday:"FRI", band:"levitation room", support:"w/ Queentide", genre:"Psych Rock", venue:"Ojai Deer Lodge", location:"Ojai", price:"Tix", priceType:"paid", tag:"", url:"https://www.eventbrite.com/e/levitation-room-deer-lodge-ojai-51-tickets-1984406076995" },
     { day:"01", month:"MAY", weekday:"FRI", band:"Surfer Girl", support:"+ Doublecamp, Dylan Cotrone", genre:"Surf / Indie", venue:"SLO Brew Rock", location:"SLO", price:"$29+", priceType:"paid", tag:"", url:"https://www.ticketweb.com/event/surfer-girl-doublecamp-dylan-cotrone-slo-brew-rock-tickets/14095724" },
+    { day:"02", month:"MAY", weekday:"SAT", band:"Shabang Music Festival", support:"Chris Lake · Polo & Pan · Backseat Lovers · Magdalena Bay · and more · May 2–3", genre:"Indie / Electronic / Festival", venue:"Dairy Creek Golf Course", location:"SLO", price:"$146+", priceType:"paid", tag:"festival", url:"https://shabangslo.com/tickets/" },
     { day:"02", month:"MAY", weekday:"SAT", band:"Candy-O", support:"Tribute to The Cars", genre:"New Wave / Tribute", venue:"The Siren", location:"Morro Bay", price:"Tix", priceType:"paid", tag:"", url:"https://thesirenmorrobay.com/events/list/" },
     { day:"06", month:"MAY", weekday:"WED", band:"James Taylor & His All-Star Band", support:"", genre:"Rock / Folk", venue:"Santa Barbara Bowl", location:"SB", price:"Tix", priceType:"paid", tag:"", url:"https://www.axs.com/events/1273553/james-taylor-his-all-star-band-tickets" },
     { day:"07", month:"MAY", weekday:"THU", band:"Flight of the Conchords", support:"", genre:"Comedy / Folk", venue:"Santa Barbara Bowl", location:"SB", price:"$56+", priceType:"paid", tag:"", url:"https://www.axs.com/events/1354210/flight-of-the-conchords-tickets" },

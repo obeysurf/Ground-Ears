@@ -524,6 +524,8 @@
     .pa-4 { background: linear-gradient(135deg, #00101e, #003050); }
     .pa-5 { background: linear-gradient(135deg, #1e1e00, #505000); }
     .pa-6 { background: linear-gradient(135deg, #1e000e, #5a0028); }
+    .pa-7 { background: linear-gradient(135deg, #001e10, #005030); }
+    .pa-8 { background: linear-gradient(135deg, #1e1400, #504000); }
     .playlist-num {
       position: absolute;
       bottom: 0.75rem;
@@ -765,6 +767,173 @@
       margin-top: 2px;
     }
 
+    /* ─── SPIN THE GLOBE ─── */
+    .globe-country-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid var(--dim);
+      padding: 5px 14px;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+    .globe-tagline {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+    .globe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    @media (max-width: 600px) { .globe-grid { grid-template-columns: 1fr; } }
+    .globe-card {
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .globe-card:hover { border-color: var(--dim); }
+    .globe-hero {
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      position: relative;
+      background: var(--bg3);
+    }
+    .globe-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s;
+    }
+    .globe-card:hover .globe-hero img { transform: scale(1.04); }
+    .globe-hero-fallback {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+    }
+    .globe-body { padding: 1.1rem; }
+    .globe-genre {
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+    .globe-band {
+      font-family: var(--serif);
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      line-height: 1.1;
+    }
+    .globe-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 0.9rem;
+    }
+    .globe-links { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .globe-link {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border: 1px solid var(--dim);
+      color: var(--muted);
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .globe-link:hover { border-color: var(--text); color: var(--text); }
+    .globe-link.yt { border-color: #cc0000; color: #cc0000; }
+    .globe-link.yt:hover { background: #cc0000; color: #fff; }
+
+    /* ─── ART ─── */
+    .art-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 1.5rem;
+    }
+    @media (max-width: 600px) { .art-grid { grid-template-columns: 1fr; } }
+    .art-card {
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: border-color 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .art-card:hover { border-color: var(--dim); }
+    .art-img {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+    }
+    .art-img-inner {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.4s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+    }
+    .art-card:hover .art-img-inner { transform: scale(1.04); }
+    .ai-1 { background: linear-gradient(135deg, #1a0a2e, #3d1a5a); }
+    .ai-2 { background: linear-gradient(135deg, #0a1e1e, #1a4a4a); }
+    .ai-3 { background: linear-gradient(135deg, #1e1200, #4a2c00); }
+    .ai-4 { background: linear-gradient(135deg, #001a0d, #004830); }
+    .ai-5 { background: linear-gradient(135deg, #1a0010, #4a002e); }
+    .ai-6 { background: linear-gradient(135deg, #0a0a1e, #1a1a4a); }
+    .ai-7 { background: linear-gradient(135deg, #1e0a00, #4a1800); }
+    .ai-8 { background: linear-gradient(135deg, #001218, #003040); }
+    .art-body { padding: 1.1rem; }
+    .art-type {
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--lime);
+      margin-bottom: 0.4rem;
+    }
+    .art-title {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 0.98rem;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+      margin-bottom: 0.4rem;
+      transition: color 0.15s;
+    }
+    .art-card:hover .art-title { color: var(--accent); }
+    .art-meta {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .art-desc {
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
     /* ─── HIDDEN UTILITY ─── */
     .hidden { display: none !important; }
   </style>
@@ -778,7 +947,8 @@
     <li><a href="#shows">Shows</a></li>
     <li><a href="#playlists">Playlists</a></li>
     <li><a href="#interviews">Interviews</a></li>
-    <li><a href="#wraps">Wraps</a></li>
+    <li><a href="#globe">Globe</a></li>
+    <li><a href="#art">Art</a></li>
   </ul>
   <span class="nav-pill">SLO · SB · Ventura</span>
 </nav>
@@ -946,6 +1116,20 @@
       <div class="playlist-meta">Curated by Jack Bush · 441 tracks · Central Coast approved</div>
     </div>
 
+    <div class="playlist-card">
+      <div class="playlist-genre">Mixed / Personal Picks</div>
+      <iframe src="https://open.spotify.com/embed/playlist/37i9dQZEVXcJZyENOWUFo7?utm_source=generator" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <div class="playlist-title">shotintheblue · Picks Vol. 1</div>
+      <div class="playlist-meta">Curated by shotintheblue · personal rotation</div>
+    </div>
+
+    <div class="playlist-card">
+      <div class="playlist-genre">Mixed / Personal Picks</div>
+      <iframe src="https://open.spotify.com/embed/playlist/37i9dQZEVXcMykMCKZMXvK?utm_source=generator" height="152" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <div class="playlist-title">shotintheblue · Picks Vol. 2</div>
+      <div class="playlist-meta">Curated by shotintheblue · personal rotation</div>
+    </div>
+
   </div>
 </div>
 
@@ -1011,77 +1195,188 @@
 
 <hr class="rule">
 
-<!-- ── WRAPS ── -->
-<div class="section" id="wraps">
+<!-- ── SPIN THE GLOBE ── -->
+<div class="section" id="globe">
   <div class="section-head">
     <div class="section-head-left">
-      <h2 class="section-title">Wraps</h2>
-      <span class="section-label">/ show photos</span>
+      <h2 class="section-title">Spin the Globe</h2>
+      <span class="section-label">/ rising underground</span>
     </div>
-    <a href="#" class="section-link">All wraps →</a>
+    <a href="#" class="section-link">Updated every 14 days →</a>
   </div>
 
-  <div class="wraps-grid">
+  <div class="globe-country-badge">🇨🇴 Colombia</div>
+  <p class="globe-tagline">This fortnight's pick — 4 bands pushing the underground in Bogotá and beyond</p>
 
-    <div class="wrap-item">
-      <a class="wrap-link" href="https://www.instagram.com/slobrewlive/" target="_blank" rel="noopener">
-        <div class="wrap-photo wi-1"></div>
-        <span class="wrap-photo-count">View gallery ↗</span>
-        <div class="wrap-caption">
-          <div class="wrap-event">Recent Shows @ SLO Brew Rock</div>
-          <div class="wrap-date-loc">San Luis Obispo · 2026</div>
-          <div class="wrap-credit">📷 @slobrewlive</div>
+  <div class="globe-grid">
+
+    <div class="globe-card">
+      <div class="globe-hero">
+        <img src="https://img.youtube.com/vi/lSBUepWSeek/maxresdefault.jpg"
+             alt="BABELGAM live"
+             onerror="this.style.display='none';this.parentElement.querySelector('.globe-hero-fallback').style.display='flex'">
+        <div class="globe-hero-fallback" style="background:linear-gradient(135deg,#1a0a2e,#3d1260);">🎸</div>
+      </div>
+      <div class="globe-body">
+        <div class="globe-genre">Post-Punk / Doom-Pop</div>
+        <div class="globe-band">BABELGAM</div>
+        <div class="globe-desc">Bogotá duo blending post-punk dissonance with doomy, hypnotic pop textures — think Bauhaus filtered through a South American lens. One of the most distinctive sounds to emerge from the Colombian underground.</div>
+        <div class="globe-links">
+          <a class="globe-link" href="https://www.radionica.rocks/musica/artistas-colombianos/babelgam-y-el-contraste-sin-limites" target="_blank" rel="noopener">Read →</a>
+          <a class="globe-link yt" href="https://www.youtube.com/watch?v=lSBUepWSeek" target="_blank" rel="noopener">▶ Watch</a>
         </div>
-      </a>
+      </div>
     </div>
 
-    <div class="wrap-item">
-      <a class="wrap-link" href="https://www.sohosb.com/gallery" target="_blank" rel="noopener">
-        <div class="wrap-photo wi-2"></div>
-        <span class="wrap-photo-count">View gallery ↗</span>
-        <div class="wrap-caption">
-          <div class="wrap-event">Live at SoHo Music Club</div>
-          <div class="wrap-date-loc">Santa Barbara · Spring 2026</div>
-          <div class="wrap-credit">📷 SoHo Photo Gallery</div>
+    <div class="globe-card">
+      <div class="globe-hero">
+        <img src="https://img.youtube.com/vi/fuTC87N4JAY/maxresdefault.jpg"
+             alt="LA PAYARA live"
+             onerror="this.style.display='none';this.parentElement.querySelector('.globe-hero-fallback').style.display='flex'">
+        <div class="globe-hero-fallback" style="background:linear-gradient(135deg,#1e0a00,#502000);">🌀</div>
+      </div>
+      <div class="globe-body">
+        <div class="globe-genre">Psychedelic Cumbia</div>
+        <div class="globe-band">LA PAYARA</div>
+        <div class="globe-desc">Cartagena-rooted psychedelic cumbia — traditional coastal rhythms run through a woozy, hallucinatory filter. La Payara's live sets are equal parts ritual and rave, pulling deep from Afro-Colombian tradition.</div>
+        <div class="globe-links">
+          <a class="globe-link" href="https://soundsandcolours.com/articles/colombia/12-new-colombian-bands-need-hear-39551/" target="_blank" rel="noopener">Read →</a>
+          <a class="globe-link yt" href="https://www.youtube.com/watch?v=fuTC87N4JAY" target="_blank" rel="noopener">▶ Watch</a>
         </div>
-      </a>
+      </div>
     </div>
 
-    <div class="wrap-item">
-      <a class="wrap-link" href="https://www.instagram.com/venturamusichall/" target="_blank" rel="noopener">
-        <div class="wrap-photo wi-3"></div>
-        <span class="wrap-photo-count">View gallery ↗</span>
-        <div class="wrap-caption">
-          <div class="wrap-event">Ventura Music Hall Nights</div>
-          <div class="wrap-date-loc">Ventura · 2026</div>
-          <div class="wrap-credit">📷 @venturamusichall</div>
+    <div class="globe-card">
+      <div class="globe-hero">
+        <img src="https://img.youtube.com/vi/iBYERd4_z-A/maxresdefault.jpg"
+             alt="MULA live"
+             onerror="this.style.display='none';this.parentElement.querySelector('.globe-hero-fallback').style.display='flex'">
+        <div class="globe-hero-fallback" style="background:linear-gradient(135deg,#001a0d,#004830);">🎺</div>
+      </div>
+      <div class="globe-body">
+        <div class="globe-genre">Free Jazz / Experimental</div>
+        <div class="globe-band">MULA</div>
+        <div class="globe-desc">Bogotá's foremost free jazz collective — no boundaries, no predictability. MULA improvises across jazz, noise, and folk with an urgency that's won them a devoted following across the Latin American experimental circuit.</div>
+        <div class="globe-links">
+          <a class="globe-link" href="https://www.radionica.rocks/musica/artistas-colombianos/" target="_blank" rel="noopener">Read →</a>
+          <a class="globe-link yt" href="https://www.youtube.com/watch?v=iBYERd4_z-A" target="_blank" rel="noopener">▶ Watch</a>
         </div>
-      </a>
+      </div>
     </div>
 
-    <div class="wrap-item">
-      <a class="wrap-link" href="https://www.venturatheater.net/photos/" target="_blank" rel="noopener">
-        <div class="wrap-photo wi-4"></div>
-        <span class="wrap-photo-count">View gallery ↗</span>
-        <div class="wrap-caption">
-          <div class="wrap-event">Majestic Ventura Theater</div>
-          <div class="wrap-date-loc">Ventura · 2026</div>
-          <div class="wrap-credit">📷 Ventura Theater Photo Archive</div>
+    <div class="globe-card">
+      <div class="globe-hero">
+        <img src="https://img.youtube.com/vi/PZKiXTH9UNM/maxresdefault.jpg"
+             alt="LIKA NOVA live"
+             onerror="this.style.display='none';this.parentElement.querySelector('.globe-hero-fallback').style.display='flex'">
+        <div class="globe-hero-fallback" style="background:linear-gradient(135deg,#0a0a1e,#1a1a4a);">✨</div>
+      </div>
+      <div class="globe-body">
+        <div class="globe-genre">Indie Pop-Rock / Pacific Rhythms</div>
+        <div class="globe-band">LIKA NOVA</div>
+        <div class="globe-desc">Cali-based project fusing indie pop-rock with the Pacific rhythms of Colombia's coastal south — marimba, cununos, and lush guitar woven into something entirely their own. Riding the wave of Colombia's international indie boom.</div>
+        <div class="globe-links">
+          <a class="globe-link" href="https://garajedelrock.com/entrevistas/lika-nova-ha-sido-increible-el-cambio-para-bien-que-ha-traido-el-auge-de-colombia/" target="_blank" rel="noopener">Read →</a>
+          <a class="globe-link yt" href="https://www.youtube.com/watch?v=PZKiXTH9UNM" target="_blank" rel="noopener">▶ Watch</a>
         </div>
-      </a>
+      </div>
     </div>
 
-    <div class="wrap-item">
-      <a class="wrap-link" href="https://www.instagram.com/thesirenmorrobay/" target="_blank" rel="noopener">
-        <div class="wrap-photo wi-5"></div>
-        <span class="wrap-photo-count">View gallery ↗</span>
-        <div class="wrap-caption">
-          <div class="wrap-event">Nights at The Siren</div>
-          <div class="wrap-date-loc">Morro Bay · 2026</div>
-          <div class="wrap-credit">📷 @thesirenmorrobay</div>
-        </div>
-      </a>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- ── ART ── -->
+<div class="section" id="art">
+  <div class="section-head">
+    <div class="section-head-left">
+      <h2 class="section-title">Art</h2>
+      <span class="section-label">/ SLO · SB · Ventura</span>
     </div>
+    <a href="#" class="section-link">All exhibitions →</a>
+  </div>
+  <div class="art-grid">
+
+    <a class="art-card" href="https://www.sbma.net/exhibitions" target="_blank" rel="noopener">
+      <div class="art-img"><div class="art-img-inner ai-1">🎨</div></div>
+      <div class="art-body">
+        <div class="art-type">Permanent Collection</div>
+        <div class="art-title">Modern Life: A Global Artworld, 1850–1950</div>
+        <div class="art-meta">Through May 31, 2026 · Santa Barbara Museum of Art · SB</div>
+        <div class="art-desc">Highlights from the SBMA permanent collection spanning Impressionism through early Modernism — 100 years of global art history in one room.</div>
+      </div>
+    </a>
+
+    <a class="art-card" href="https://www.mcasantabarbara.org/" target="_blank" rel="noopener">
+      <div class="art-img"><div class="art-img-inner ai-2">🖼️</div></div>
+      <div class="art-body">
+        <div class="art-type">Solo Exhibition</div>
+        <div class="art-title">DJ Javier: San Milano Drive</div>
+        <div class="art-meta">Opens Apr 20, 2026 · MCA Santa Barbara · SB</div>
+        <div class="art-desc">Debut solo museum show from Santa Barbara–based Filipino-American artist DJ Javier. A landmark moment for local contemporary art.</div>
+      </div>
+    </a>
+
+    <a class="art-card" href="https://www.mcasantabarbara.org/exhibitions/" target="_blank" rel="noopener">
+      <div class="art-img"><div class="art-img-inner ai-3">🌺</div></div>
+      <div class="art-body">
+        <div class="art-type">Group Exhibition</div>
+        <div class="art-title">Arte Del Pueblo</div>
+        <div class="art-meta">Jun 7 – Jul 25, 2026 · MCA Santa Barbara · SB</div>
+        <div class="art-desc">A community-centered exhibition celebrating Latinx art and culture. Opening reception June 7, noon–3pm — free and open to all.</div>
+      </div>
+    </a>
+
+    <a class="art-card" href="https://artgallery.calpoly.edu/" target="_blank" rel="noopener">
+      <div class="art-img"><div class="art-img-inner ai-4">📷</div></div>
+      <div class="art-body">
+        <div class="art-type">BFA Show · Photography</div>
+        <div class="art-title">F/6 — Cal Poly BFA Photography</div>
+        <div class="art-meta">May 22–29, 2026 · Cal Poly University Art Gallery · SLO</div>
+        <div class="art-desc">Senior BFA photography exhibition from Cal Poly's fine arts program. Opening reception May 22, 5–7pm. Free admission.</div>
+      </div>
+    </a>
+
+    <a class="art-card" href="https://sloma.org/exhibits/current/" target="_blank" rel="noopener">
+      <div class="art-img"><div class="art-img-inner ai-5">🏛️</div></div>
+      <div class="art-body">
+        <div class="art-type">Rotating Exhibitions</div>
+        <div class="art-title">SLOMA Spring 2026</div>
+        <div class="art-meta">Ongoing · San Luis Obispo Museum of Art · SLO</div>
+        <div class="art-desc">Rotating shows featuring local and regional artists alongside public art installations. Art After Dark on the first Friday of every month.</div>
+      </div>
+    </a>
+
+    <a class="art-card" href="https://www.westmont.edu/museum" target="_blank" rel="noopener">
+      <div class="art-img"><div class="art-img-inner ai-6">🎓</div></div>
+      <div class="art-body">
+        <div class="art-type">Senior Exhibition</div>
+        <div class="art-title">Re-Encounter</div>
+        <div class="art-meta">Spring 2026 · Westmont Ridley-Tree Museum of Art · SB</div>
+        <div class="art-desc">Annual senior show with 14 emerging artists exploring memory, identity, and the space between past and future lives. Free admission.</div>
+      </div>
+    </a>
+
+    <a class="art-card" href="https://studiochannelislands.org/gallery/" target="_blank" rel="noopener">
+      <div class="art-img"><div class="art-img-inner ai-7">🎭</div></div>
+      <div class="art-body">
+        <div class="art-type">Group Show</div>
+        <div class="art-title">New Work from Across the US</div>
+        <div class="art-meta">Jun 6 – Jul 25, 2026 · Studio Channel Islands · Camarillo</div>
+        <div class="art-desc">A diverse group show featuring new paintings, sculpture, and mixed media from artists across the United States. Free to attend.</div>
+      </div>
+    </a>
+
+    <a class="art-card" href="https://venturamuseum.org/" target="_blank" rel="noopener">
+      <div class="art-img"><div class="art-img-inner ai-8">🖌️</div></div>
+      <div class="art-body">
+        <div class="art-type">Solo Show · Paintings</div>
+        <div class="art-title">Love and Loss — Andres Salazar</div>
+        <div class="art-meta">Opened Apr 4, 2026 · The WAV Gallery · Ventura</div>
+        <div class="art-desc">Over 30 new paintings and works on paper by Ventura artist Andres Salazar, exploring grief, love, and the human condition.</div>
+      </div>
+    </a>
 
   </div>
 </div>
@@ -1099,7 +1394,8 @@
       <li><a href="#shows">Upcoming Shows</a></li>
       <li><a href="#playlists">Playlists</a></li>
       <li><a href="#interviews">Interviews</a></li>
-      <li><a href="#wraps">Wraps</a></li>
+      <li><a href="#globe">Spin the Globe</a></li>
+      <li><a href="#art">Art</a></li>
     </ul>
   </div>
   <div class="footer-col">
@@ -1177,8 +1473,12 @@
   let currentFilter  = "all";
 
   /* ── Render ── */
+  const monthToNum = {JAN:0,FEB:1,MAR:2,APR:3,MAY:4,JUN:5,JUL:6,AUG:7,SEP:8,OCT:9,NOV:10,DEC:11};
   function getFiltered() {
+    const today = new Date(); today.setHours(0,0,0,0);
     return shows.filter(s => {
+      const showDate = new Date(2026, monthToNum[s.month], parseInt(s.day));
+      if (showDate < today) return false;
       if (currentFilter === "all") return true;
       return s.location === currentFilter;
     });
@@ -1274,8 +1574,13 @@
   /* ── Dynamic month stat ── */
   (function() {
     const monthNames = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
-    const currentMonth = monthNames[new Date().getMonth()];
-    const count = shows.filter(s => s.month === currentMonth).length;
+    const now = new Date(); now.setHours(0,0,0,0);
+    const currentMonth = monthNames[now.getMonth()];
+    const count = shows.filter(s => {
+      if (s.month !== currentMonth) return false;
+      const d = new Date(2026, monthToNum[s.month], parseInt(s.day));
+      return d >= now;
+    }).length;
     const el = document.getElementById("stat-month-count");
     if (el) el.textContent = count > 0 ? count : shows.length;
   })();

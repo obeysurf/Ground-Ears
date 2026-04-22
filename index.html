@@ -312,6 +312,48 @@
     .sort-btn.active { border-color: var(--accent); color: var(--accent); }
     .sort-btn:hover:not(.active) { border-color: var(--dim); color: var(--text); }
 
+    /* ─── GENRE DROPDOWN ─── */
+    .genre-dropdown-wrap { position: relative; }
+    .genre-dropdown-btn { display: flex; align-items: center; gap: 0.35rem; }
+    .genre-dropdown-btn .g-arrow { font-size: 0.45rem; transition: transform 0.15s; display: inline-block; }
+    .genre-dropdown-btn.open .g-arrow { transform: rotate(180deg); }
+    .genre-dropdown-btn.open,
+    .genre-dropdown-btn.filtered { border-color: var(--accent); color: var(--accent); }
+    .genre-dropdown-panel {
+      display: none;
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      z-index: 300;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 0.5rem;
+      min-width: 320px;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.6);
+    }
+    .genre-dropdown-panel.open { display: grid; }
+    .genre-option {
+      font-family: var(--mono);
+      font-size: 0.54rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 7px 10px;
+      border: 1px solid transparent;
+      color: var(--muted);
+      cursor: pointer;
+      text-align: left;
+      background: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: all 0.1s;
+    }
+    .genre-option:hover { border-color: var(--dim); color: var(--text); background: var(--bg3); }
+    .genre-option.active { border-color: var(--accent); color: var(--accent); background: rgba(255,61,0,0.06); }
+    .genre-option.all-option { grid-column: span 2; border-color: var(--border); margin-bottom: 2px; }
+
     .filter-pills {
       display: flex;
       gap: 0.4rem;
@@ -1067,7 +1109,14 @@
       <button class="sort-btn active" onclick="setSort('date', this)">Date</button>
       <button class="sort-btn" onclick="setSort('venue', this)">Venue</button>
       <button class="sort-btn" onclick="setSort('location', this)">Location</button>
-      <button class="sort-btn" onclick="setSort('genre', this)">Genre</button>
+      <div class="genre-dropdown-wrap">
+        <button class="sort-btn genre-dropdown-btn" id="genre-dropdown-btn" onclick="toggleGenreDropdown(event)">
+          <span class="genre-label">Genre</span><span class="g-arrow">▼</span>
+        </button>
+        <div id="genre-panel" class="genre-dropdown-panel">
+          <!-- populated by JS -->
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1459,7 +1508,7 @@
   <div class="footer-col">
     <h5>Community</h5>
     <ul>
-      <li><a href="#">Submit Your Band</a></li>
+      <li><a href="submit.html">Submit Your Band</a></li>
       <li><a href="#">List a Show</a></li>
       <li><a href="#">Newsletter</a></li>
       <li><a href="#">Write for Us</a></li>
@@ -1526,9 +1575,10 @@
 
   const posterPalettes = ["pg-1","pg-2","pg-3","pg-4","pg-5","pg-6","pg-7","pg-8"];
 
-  let currentView    = "calendar";
-  let currentSort    = "date";
-  let currentFilter  = "all";
+  let currentView        = "calendar";
+  let currentSort        = "date";
+  let currentFilter      = "all";
+  let currentGenreFilter = "all";
 
   /* ── Render ── */
   const monthToNum = {JAN:0,FEB:1,MAR:2,APR:3,MAY:4,JUN:5,JUL:6,AUG:7,SEP:8,OCT:9,NOV:10,DEC:11};
@@ -1537,10 +1587,51 @@
     return shows.filter(s => {
       const showDate = new Date(2026, monthToNum[s.month], parseInt(s.day));
       if (showDate < today) return false;
-      if (currentFilter === "all") return true;
-      return s.location === currentFilter;
+      if (currentFilter !== "all" && s.location !== currentFilter) return false;
+      if (currentGenreFilter !== "all" && s.genre !== currentGenreFilter) return false;
+      return true;
     });
   }
+
+  /* ── Genre dropdown ── */
+  function buildGenreDropdown() {
+    const genres = [...new Set(shows.map(s => s.genre))].sort();
+    const panel = document.getElementById("genre-panel");
+    panel.innerHTML =
+      `<button class="genre-option all-option active" data-genre="all" onclick="setGenreFilter('all', this)">All Genres</button>` +
+      genres.map(g =>
+        `<button class="genre-option" data-genre="${g}" onclick="setGenreFilter('${g.replace(/'/g,"\\'")}'  , this)">${g}</button>`
+      ).join("");
+  }
+
+  function toggleGenreDropdown(e) {
+    e.stopPropagation();
+    const panel = document.getElementById("genre-panel");
+    const btn   = document.getElementById("genre-dropdown-btn");
+    const isOpen = panel.classList.toggle("open");
+    btn.classList.toggle("open", isOpen);
+  }
+
+  function setGenreFilter(genre, btn) {
+    currentGenreFilter = genre;
+    const panel = document.getElementById("genre-panel");
+    const dropBtn = document.getElementById("genre-dropdown-btn");
+    panel.querySelectorAll(".genre-option").forEach(o => o.classList.toggle("active", o.dataset.genre === genre));
+    dropBtn.querySelector(".genre-label").textContent = genre === "all" ? "Genre" : genre;
+    dropBtn.classList.toggle("filtered", genre !== "all");
+    panel.classList.remove("open");
+    dropBtn.classList.remove("open");
+    render();
+  }
+
+  document.addEventListener("click", function(e) {
+    if (!e.target.closest(".genre-dropdown-wrap")) {
+      const panel = document.getElementById("genre-panel");
+      const btn   = document.getElementById("genre-dropdown-btn");
+      if (panel) panel.classList.remove("open");
+      if (btn)   btn.classList.remove("open");
+    }
+  });
 
   function getSorted(arr) {
     const copy = [...arr];
@@ -1644,6 +1735,7 @@
   })();
 
   /* ── Init ── */
+  buildGenreDropdown();
   render();
 </script>
 

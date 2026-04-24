@@ -371,6 +371,20 @@
     .genre-option.all-option.active { border-color: var(--accent); color: var(--accent); background: rgba(212,40,0,0.06); }
     .genre-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 6px; flex-shrink: 0; vertical-align: middle; }
 
+    /* Venue dropdown — single column, wider */
+    .venue-dropdown-panel {
+      grid-template-columns: 1fr !important;
+      min-width: 240px !important;
+    }
+    .venue-dropdown-panel .genre-option {
+      white-space: normal !important;
+      overflow: visible !important;
+      text-overflow: unset !important;
+    }
+    .venue-dropdown-panel .genre-option.all-option {
+      grid-column: span 1 !important;
+    }
+
     .filter-pills {
       display: flex;
       gap: 0.4rem;
@@ -1237,8 +1251,15 @@
     </div>
     <div class="sort-controls">
       <button class="sort-btn active" onclick="setSort('date', this)">Date</button>
-      <button class="sort-btn" onclick="setSort('venue', this)">Venue</button>
       <button class="sort-btn" onclick="setSort('location', this)">Location</button>
+      <div class="genre-dropdown-wrap">
+        <button class="sort-btn genre-dropdown-btn" id="venue-dropdown-btn" onclick="toggleVenueDropdown(event)">
+          <span class="venue-label">Venue</span><span class="g-arrow">▼</span>
+        </button>
+        <div id="venue-panel" class="genre-dropdown-panel venue-dropdown-panel">
+          <!-- populated by JS -->
+        </div>
+      </div>
       <div class="genre-dropdown-wrap">
         <button class="sort-btn genre-dropdown-btn" id="genre-dropdown-btn" onclick="toggleGenreDropdown(event)">
           <span class="genre-label">Genre</span><span class="g-arrow">▼</span>
@@ -1742,6 +1763,7 @@
   let currentSort        = "date";
   let currentFilter      = "all";
   let currentGenreFilter = "all";
+  let currentVenueFilter = "all";
   let currentTagFilter   = "all";
 
   /* ── Render ── */
@@ -1753,6 +1775,7 @@
       if (showDate < today) return false;
       if (currentFilter !== "all" && s.location !== currentFilter) return false;
       if (currentGenreFilter !== "all" && s.genre !== currentGenreFilter) return false;
+      if (currentVenueFilter !== "all" && s.venue !== currentVenueFilter) return false;
       if (currentTagFilter !== "all" && s.tag !== currentTagFilter) return false;
       return true;
     });
@@ -1761,6 +1784,7 @@
   function filterToFestivals() {
     currentTagFilter = "festival";
     currentGenreFilter = "all";
+    currentVenueFilter = "all";
     currentFilter = "all";
     // Reset location pills
     document.querySelectorAll(".filter-pill").forEach(p => p.classList.remove("active"));
@@ -1783,8 +1807,52 @@
       }).join("");
   }
 
+  function buildVenueDropdown() {
+    const venues = [...new Set(shows.map(s => s.venue))].sort();
+    const panel = document.getElementById("venue-panel");
+    panel.innerHTML =
+      `<button class="genre-option all-option active" data-venue="all" onclick="setVenueFilter('all')">All Venues</button>` +
+      venues.map(v =>
+        `<button class="genre-option" data-venue="${v.replace(/"/g,'&quot;')}" onclick="setVenueFilter('${v.replace(/'/g,"\\'")}')"><span style="color:var(--muted);margin-right:4px;">▸</span>${v}</button>`
+      ).join("");
+  }
+
+  function toggleVenueDropdown(e) {
+    e.stopPropagation();
+    // Close genre dropdown first
+    document.getElementById("genre-panel").classList.remove("open");
+    document.getElementById("genre-dropdown-btn").classList.remove("open");
+    const panel = document.getElementById("venue-panel");
+    const btn   = document.getElementById("venue-dropdown-btn");
+    const isOpen = panel.classList.toggle("open");
+    btn.classList.toggle("open", isOpen);
+  }
+
+  function setVenueFilter(venue) {
+    currentVenueFilter = venue;
+    currentTagFilter = "all";
+    const panel = document.getElementById("venue-panel");
+    const dropBtn = document.getElementById("venue-dropdown-btn");
+    panel.querySelectorAll(".genre-option").forEach(o => o.classList.toggle("active", o.dataset.venue === venue));
+    const label = dropBtn.querySelector(".venue-label");
+    label.textContent = venue === "all" ? "Venue" : venue;
+    if (venue !== "all") {
+      dropBtn.style.color = "var(--accent)";
+      dropBtn.style.borderColor = "var(--accent)";
+    } else {
+      dropBtn.style.color = "";
+      dropBtn.style.borderColor = "";
+    }
+    dropBtn.classList.remove("open");
+    panel.classList.remove("open");
+    render();
+  }
+
   function toggleGenreDropdown(e) {
     e.stopPropagation();
+    // Close venue dropdown first
+    document.getElementById("venue-panel").classList.remove("open");
+    document.getElementById("venue-dropdown-btn").classList.remove("open");
     const panel = document.getElementById("genre-panel");
     const btn   = document.getElementById("genre-dropdown-btn");
     const isOpen = panel.classList.toggle("open");
@@ -1793,7 +1861,10 @@
 
   function setGenreFilter(genre, btn) {
     currentGenreFilter = genre;
-    currentTagFilter = "all"; // clear festival filter when genre changes
+    currentTagFilter = "all";
+    currentVenueFilter = "all";
+    const venueBtn = document.getElementById("venue-dropdown-btn");
+    if (venueBtn) { venueBtn.style.color = ""; venueBtn.style.borderColor = ""; venueBtn.querySelector(".venue-label").textContent = "Venue"; }
     const panel = document.getElementById("genre-panel");
     const dropBtn = document.getElementById("genre-dropdown-btn");
     const c = getGenreColor(genre);
@@ -1814,10 +1885,14 @@
 
   document.addEventListener("click", function(e) {
     if (!e.target.closest(".genre-dropdown-wrap")) {
-      const panel = document.getElementById("genre-panel");
-      const btn   = document.getElementById("genre-dropdown-btn");
-      if (panel) panel.classList.remove("open");
-      if (btn)   btn.classList.remove("open");
+      const gPanel = document.getElementById("genre-panel");
+      const gBtn   = document.getElementById("genre-dropdown-btn");
+      const vPanel = document.getElementById("venue-panel");
+      const vBtn   = document.getElementById("venue-dropdown-btn");
+      if (gPanel) gPanel.classList.remove("open");
+      if (gBtn)   gBtn.classList.remove("open");
+      if (vPanel) vPanel.classList.remove("open");
+      if (vBtn)   vBtn.classList.remove("open");
     }
   });
 
@@ -1936,7 +2011,10 @@
 
   function setFilter(f, btn) {
     currentFilter = f;
-    currentTagFilter = "all"; // clear festival filter when location changes
+    currentTagFilter = "all";
+    currentVenueFilter = "all";
+    const venueBtn = document.getElementById("venue-dropdown-btn");
+    if (venueBtn) { venueBtn.style.color = ""; venueBtn.style.borderColor = ""; venueBtn.querySelector(".venue-label").textContent = "Venue"; }
     document.querySelectorAll(".filter-pill").forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
     render();
@@ -1957,6 +2035,7 @@
   })();
 
   /* ── Init ── */
+  buildVenueDropdown();
   buildGenreDropdown();
   render();
 </script>

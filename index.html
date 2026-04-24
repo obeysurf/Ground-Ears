@@ -181,6 +181,13 @@
       border: 1.5px solid var(--text);
       background: var(--yellow);
       border-left: 5px solid var(--accent);
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 0.15s, transform 0.15s;
+    }
+    .hero-stat:hover {
+      box-shadow: 3px 3px 0 var(--text);
+      transform: translate(-1px, -1px);
     }
     .stat-num {
       font-family: var(--display);
@@ -1070,18 +1077,18 @@
     </div>
   </div>
   <div class="hero-right">
-    <div class="hero-stat">
+    <a class="hero-stat" href="#shows">
       <span class="stat-num" id="stat-month-count">—</span>
       <span class="stat-label">shows<br>this month</span>
-    </div>
-    <div class="hero-stat">
+    </a>
+    <a class="hero-stat" href="#shows" onclick="setTimeout(filterToFestivals, 80)">
       <span class="stat-num">3</span>
       <span class="stat-label">festivals<br>coming up</span>
-    </div>
-    <div class="hero-stat">
+    </a>
+    <a class="hero-stat" href="#shows">
       <span class="stat-num">9</span>
       <span class="stat-label">venues<br>we cover</span>
-    </div>
+    </a>
   </div>
 </div>
 
@@ -1643,6 +1650,7 @@
   let currentSort        = "date";
   let currentFilter      = "all";
   let currentGenreFilter = "all";
+  let currentTagFilter   = "all";
 
   /* ── Render ── */
   const monthToNum = {JAN:0,FEB:1,MAR:2,APR:3,MAY:4,JUN:5,JUL:6,AUG:7,SEP:8,OCT:9,NOV:10,DEC:11};
@@ -1653,8 +1661,22 @@
       if (showDate < today) return false;
       if (currentFilter !== "all" && s.location !== currentFilter) return false;
       if (currentGenreFilter !== "all" && s.genre !== currentGenreFilter) return false;
+      if (currentTagFilter !== "all" && s.tag !== currentTagFilter) return false;
       return true;
     });
+  }
+
+  function filterToFestivals() {
+    currentTagFilter = "festival";
+    currentGenreFilter = "all";
+    currentFilter = "all";
+    // Reset location pills
+    document.querySelectorAll(".filter-pill").forEach(p => p.classList.remove("active"));
+    document.querySelector(".filter-pill[data-loc='all']")?.classList.add("active");
+    // Reset genre dropdown
+    const dropBtn = document.getElementById("genre-dropdown-btn");
+    if (dropBtn) { dropBtn.style.color = ""; dropBtn.style.borderColor = ""; dropBtn.querySelector(".genre-label").textContent = "Genre"; }
+    render();
   }
 
   /* ── Genre dropdown ── */
@@ -1679,6 +1701,7 @@
 
   function setGenreFilter(genre, btn) {
     currentGenreFilter = genre;
+    currentTagFilter = "all"; // clear festival filter when genre changes
     const panel = document.getElementById("genre-panel");
     const dropBtn = document.getElementById("genre-dropdown-btn");
     const c = getGenreColor(genre);
@@ -1788,6 +1811,7 @@
 
   function setFilter(f, btn) {
     currentFilter = f;
+    currentTagFilter = "all"; // clear festival filter when location changes
     document.querySelectorAll(".filter-pill").forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
     render();

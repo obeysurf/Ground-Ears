@@ -1040,6 +1040,104 @@
       padding-top: 0.35rem;
     }
 
+    /* ─── CALENDAR GRID VIEW ─── */
+    .shows-calgrid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1.5px solid var(--text);
+    }
+    @media (max-width: 900px) { .shows-calgrid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 640px) { .shows-calgrid { grid-template-columns: repeat(2, 1fr); } }
+
+    .calgrid-month {
+      border-right: 1.5px solid var(--text);
+      border-bottom: 1.5px solid var(--text);
+      padding: 0;
+      min-height: 180px;
+    }
+    .calgrid-month:nth-child(4n) { border-right: none; }
+    @media (max-width: 900px) {
+      .calgrid-month:nth-child(3n) { border-right: none; }
+      .calgrid-month:nth-child(4n) { border-right: 1.5px solid var(--text); }
+    }
+    @media (max-width: 640px) {
+      .calgrid-month:nth-child(2n) { border-right: none; }
+      .calgrid-month:nth-child(3n), .calgrid-month:nth-child(4n) { border-right: 1.5px solid var(--text); }
+    }
+
+    .calgrid-month-header {
+      border-top: 4px solid var(--text);
+      padding: 0.7rem 1rem 0.4rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+    .calgrid-month-name {
+      font-family: var(--display);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      letter-spacing: 0.02em;
+      line-height: 1;
+      color: var(--text);
+    }
+    .calgrid-month-year {
+      font-family: var(--mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+    .calgrid-month-shows { padding: 0.5rem 0.75rem 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    .calgrid-show {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+    .calgrid-show:hover .calgrid-show-name { color: var(--accent); }
+    .calgrid-date-badge {
+      flex-shrink: 0;
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 3px 7px;
+      border-radius: 2px;
+      line-height: 1.4;
+      color: #fff;
+      white-space: nowrap;
+      margin-top: 1px;
+    }
+    .calgrid-show-info { min-width: 0; }
+    .calgrid-show-name {
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 0.78rem;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      transition: color 0.12s;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .calgrid-show-meta {
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 1px;
+    }
+    .calgrid-empty {
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.08em;
+      color: var(--dim);
+      padding: 0.5rem 0.75rem 1rem;
+    }
+
     /* ─── HIDDEN UTILITY ─── */
     .hidden { display: none !important; }
   </style>
@@ -1134,8 +1232,8 @@
 
   <div class="shows-controls">
     <div class="view-toggle">
-      <button class="active" id="btn-calendar" onclick="setView('calendar')">Calendar</button>
-      <button id="btn-poster" onclick="setView('poster')">Posters</button>
+      <button id="btn-cal-grid" onclick="setView('cal-grid')">Calendar</button>
+      <button class="active" id="btn-calendar" onclick="setView('calendar')">List</button>
     </div>
     <div class="sort-controls">
       <button class="sort-btn active" onclick="setSort('date', this)">Date</button>
@@ -1163,13 +1261,13 @@
 
   <hr class="rule" style="margin-bottom:1.5rem">
 
-  <!-- CALENDAR VIEW -->
-  <div id="view-calendar" class="shows-calendar">
+  <!-- CALENDAR GRID VIEW -->
+  <div id="view-cal-grid" class="shows-calgrid hidden">
     <!-- js rendered -->
   </div>
 
-  <!-- POSTER VIEW -->
-  <div id="view-poster" class="shows-posters hidden">
+  <!-- LIST VIEW -->
+  <div id="view-calendar" class="shows-calendar">
     <!-- js rendered -->
   </div>
 </div>
@@ -1767,39 +1865,72 @@
     }).join("");
   }
 
-  function renderPosters(data) {
-    const el = document.getElementById("view-poster");
-    el.innerHTML = data.map((s, i) => {
-      const bgStyle = s.poster
-        ? `style="background-image:url('${s.poster}');background-size:cover;background-position:center;"`
-        : "";
+  /* Badge colors for calendar grid — cycles through genre-aware palette */
+  const badgePalette = [
+    "#d42800","#2962a8","#2a7a2a","#7a3a9a","#b85c00",
+    "#007a8a","#c73a1a","#4a7a1e","#6a2090","#007070",
+    "#b02060","#0077b6","#8a6f00","#a06400","#2a7a72"
+  ];
+
+  function renderCalGrid(data) {
+    const el = document.getElementById("view-cal-grid");
+    const monthOrder = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+    const monthFull  = {JAN:"Jan",FEB:"Feb",MAR:"Mar",APR:"Apr",MAY:"May",JUN:"Jun",JUL:"Jul",AUG:"Aug",SEP:"Sep",OCT:"Oct",NOV:"Nov",DEC:"Dec"};
+
+    // Group by month, preserving chronological order
+    const grouped = {};
+    monthOrder.forEach(m => { grouped[m] = []; });
+    data.forEach(s => { if (grouped[s.month]) grouped[s.month].push(s); });
+
+    // Only show months that have content, or all 12 if everything is filtered
+    const activeMonths = monthOrder.filter(m => grouped[m].length > 0);
+    const months = activeMonths.length ? activeMonths : monthOrder;
+
+    let colorIdx = 0;
+    el.innerHTML = months.map(m => {
+      const shows = grouped[m];
+      const showsHtml = shows.length
+        ? shows.map(s => {
+            const c = getGenreColor(s.genre);
+            colorIdx++;
+            return `
+            <a class="calgrid-show" href="${s.url}" target="_blank" rel="noopener">
+              <span class="calgrid-date-badge" style="background:${c}">${s.day}</span>
+              <div class="calgrid-show-info">
+                <div class="calgrid-show-name">${s.band}</div>
+                <div class="calgrid-show-meta">${s.venue} · ${s.location}</div>
+              </div>
+            </a>`;
+          }).join("")
+        : `<div class="calgrid-empty">No shows</div>`;
+
       return `
-      <a class="poster-card ${posterPalettes[i % 8]}" href="${s.url}" target="_blank" rel="noopener" style="text-decoration:none;">
-        <div class="poster-bg" ${bgStyle}></div>
-        <div class="poster-overlay"></div>
-        <span class="poster-price-badge">${s.price}</span>
-        <div class="poster-content">
-          <div class="poster-date">${s.day} ${s.month} · ${s.location}</div>
-          <div class="poster-band">${s.band}</div>
-          <div class="poster-venue">${s.venue}</div>
+      <div class="calgrid-month">
+        <div class="calgrid-month-header">
+          <span class="calgrid-month-name">${monthFull[m]}</span>
+          <span class="calgrid-month-year">2026</span>
         </div>
-      </a>`;
+        <div class="calgrid-month-shows">${showsHtml}</div>
+      </div>`;
     }).join("");
   }
 
   function render() {
     const data = getSorted(getFiltered());
+    renderCalGrid(data);
     renderCalendar(data);
-    renderPosters(data);
   }
 
   /* ── Controls ── */
   function setView(v) {
     currentView = v;
-    document.getElementById("view-calendar").classList.toggle("hidden", v !== "calendar");
-    document.getElementById("view-poster").classList.toggle("hidden",   v !== "poster");
-    document.getElementById("btn-calendar").classList.toggle("active",  v === "calendar");
-    document.getElementById("btn-poster").classList.toggle("active",    v === "poster");
+    document.getElementById("view-cal-grid").classList.toggle("hidden", v !== "cal-grid");
+    document.getElementById("view-calendar").classList.toggle("hidden",  v !== "calendar");
+    document.getElementById("btn-cal-grid").classList.toggle("active",  v === "cal-grid");
+    document.getElementById("btn-calendar").classList.toggle("active",   v === "calendar");
+    // Hide sort controls in grid view (they don't apply)
+    document.querySelector(".sort-controls").style.display = v === "cal-grid" ? "none" : "";
+    render();
   }
 
   function setSort(s, btn) {

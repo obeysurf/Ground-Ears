@@ -5,26 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ground Ears — Central Coast Underground</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Anton&family=Syne:wght@400;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     /* ─── TOKENS ─── */
     :root {
-      --bg:       #ece8df;
-      --bg2:      #e4dfd5;
-      --bg3:      #dbd5ca;
-      --bg4:      #d3cdc0;
-      --text:     #1a0d08;
-      --muted:    #7a6e64;
-      --dim:      #b0a898;
-      --accent:   #d42800;
-      --lime:     #5a7200;
-      --yellow:   #f5e38c;
-      --lavender: #e0d8f0;
-      --border:   #c4bdb0;
-      --serif:    'Syne', system-ui, sans-serif;
+      --bg:       #F2E0B5;  /* Canvas */
+      --bg2:      #EDD4A3;
+      --bg3:      #E6C890;
+      --bg4:      #DEB87A;
+      --text:     #38270E;  /* Soil */
+      --muted:    #8C6845;
+      --dim:      #C4A87A;
+      --accent:   #E85B37;  /* Ember */
+      --lime:     #5C5517;  /* Grass */
+      --yellow:   #FFB076;  /* Sand */
+      --lavender: #5C5517;  /* Grass/Olive (globe section) */
+      --sand:     #FFB076;
+      --clay:     #BB6545;
+      --olive:    #5C5517;
+      --border:   #D4B896;
+      --serif:    'Playfair Display', Georgia, serif;
       --mono:     'Space Mono', monospace;
-      --display:  'Anton', Impact, sans-serif;
-      --logo:     'Fredoka', system-ui, sans-serif;
+      --display:  'Abril Fatface', serif;
+      --logo:     'Abril Fatface', serif;
     }
 
     /* ─── RESET ─── */
@@ -63,21 +66,21 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 1.75rem;
-      background: rgba(236,232,223,0.92);
+      background: rgba(187,101,69,0.97);
       backdrop-filter: blur(16px);
-      border-bottom: 1.5px solid var(--text);
+      border-bottom: 2px solid rgba(56,39,14,0.3);
     }
     .nav-logo {
       font-family: var(--logo);
-      font-weight: 700;
-      font-size: 1.2rem;
+      font-weight: 400;
+      font-size: 1.25rem;
       letter-spacing: 0.01em;
-      color: var(--text);
+      color: #F2E0B5;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
-    .logo-dot { color: var(--accent); }
+    .logo-dot { color: #FFB076; }
     .nav-links {
       display: flex;
       gap: 2rem;
@@ -88,17 +91,17 @@
       font-size: 0.65rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: rgba(242,224,181,0.75);
       transition: color 0.15s;
     }
-    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover { color: #F2E0B5; }
     .nav-pill {
       font-family: var(--mono);
       font-size: 0.6rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      border: 1px solid var(--border);
-      color: var(--muted);
+      border: 1px solid rgba(242,224,181,0.45);
+      color: rgba(242,224,181,0.75);
       padding: 4px 10px;
       border-radius: 100px;
     }
@@ -130,15 +133,15 @@
     }
     .hero-title {
       font-family: var(--logo);
-      font-weight: 700;
+      font-weight: 400;
       font-size: clamp(3.6rem, 9vw, 7.5rem);
-      line-height: 0.9;
+      line-height: 0.92;
       letter-spacing: -0.01em;
       text-transform: none;
       color: var(--text);
     }
     .hero-title em {
-      font-style: normal;
+      font-style: italic;
       color: var(--accent);
     }
     .hero-desc {
@@ -160,12 +163,13 @@
       font-size: 0.65rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      padding: 11px 22px;
+      padding: 11px 24px;
+      border-radius: 100px;
       transition: all 0.15s;
     }
     .btn-accent { background: var(--accent); color: #fff; }
-    .btn-accent:hover { background: #b82000; }
-    .btn-ghost { border: 1.5px solid var(--text); color: var(--text); }
+    .btn-accent:hover { background: #c94520; box-shadow: 0 3px 12px rgba(232,91,55,0.35); }
+    .btn-ghost { border: 2px solid var(--text); color: var(--text); }
     .btn-ghost:hover { background: var(--text); color: var(--bg); }
 
     .hero-right {
@@ -178,16 +182,17 @@
       justify-content: space-between;
       align-items: center;
       padding: 1rem 1.2rem;
-      border: 1.5px solid var(--text);
+      border: 2px solid var(--text);
+      border-left: 6px solid var(--accent);
       background: var(--yellow);
-      border-left: 5px solid var(--accent);
+      border-radius: 10px;
       text-decoration: none;
       color: inherit;
       transition: box-shadow 0.15s, transform 0.15s;
     }
     .hero-stat:hover {
-      box-shadow: 3px 3px 0 var(--text);
-      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0 var(--text);
+      transform: translate(-2px, -2px);
     }
     .stat-num {
       font-family: var(--display);
@@ -208,10 +213,10 @@
     /* ─── TICKER ─── */
     .ticker {
       overflow: hidden;
-      background: var(--yellow);
-      border-top: 1.5px solid var(--text);
-      border-bottom: 1.5px solid var(--text);
-      padding: 0.55rem 0;
+      background: var(--sand);
+      border-top: 2px solid rgba(56,39,14,0.25);
+      border-bottom: 2px solid rgba(56,39,14,0.25);
+      padding: 0.6rem 0;
     }
     .ticker-track {
       display: flex;
@@ -265,9 +270,10 @@
     }
     .section-title {
       font-family: var(--display);
+      font-weight: 400;
       font-size: clamp(1.8rem, 3.5vw, 2.6rem);
       letter-spacing: 0.02em;
-      text-transform: uppercase;
+      text-transform: none;
       line-height: 1;
       color: var(--text);
     }
@@ -292,21 +298,22 @@
     }
     .view-toggle {
       display: flex;
-      border: 1.5px solid var(--text);
+      border: 2px solid var(--text);
       overflow: hidden;
+      border-radius: 100px;
     }
     .view-toggle button {
       font-family: var(--mono);
       font-size: 0.6rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      padding: 7px 14px;
+      padding: 7px 16px;
       color: var(--muted);
-      border-right: 1.5px solid var(--text);
+      border-right: 2px solid var(--text);
       transition: all 0.15s;
     }
     .view-toggle button:last-child { border-right: none; }
-    .view-toggle button.active { background: var(--text); color: var(--bg); }
+    .view-toggle button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
     .view-toggle button:hover:not(.active) { background: var(--bg3); color: var(--text); }
 
     .sort-controls {
@@ -319,12 +326,13 @@
       font-size: 0.58rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      padding: 6px 12px;
-      border: 1.5px solid var(--border);
+      padding: 6px 14px;
+      border: 2px solid var(--border);
+      border-radius: 100px;
       color: var(--muted);
       transition: all 0.15s;
     }
-    .sort-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(212,40,0,0.07); }
+    .sort-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(232,91,55,0.1); }
     .sort-btn:hover:not(.active) { border-color: var(--text); color: var(--text); }
 
     /* ─── GENRE DROPDOWN ─── */
@@ -341,12 +349,14 @@
       left: 0;
       z-index: 300;
       background: var(--bg);
-      border: 1.5px solid var(--text);
+      border: 2px solid var(--text);
+      border-radius: 12px;
       padding: 0.5rem;
       min-width: 320px;
       grid-template-columns: 1fr 1fr;
       gap: 2px;
-      box-shadow: 4px 4px 0 var(--text);
+      box-shadow: 5px 5px 0 rgba(56,39,14,0.2);
+      overflow: hidden;
     }
     .genre-dropdown-panel.open { display: grid; }
     .genre-option {
@@ -396,14 +406,15 @@
       font-size: 0.58rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      padding: 5px 12px;
-      border: 1.5px solid var(--border);
+      padding: 6px 14px;
+      border: 2px solid var(--border);
       border-radius: 100px;
-      color: var(--muted);
+      color: var(--text);
+      background: var(--bg2);
       transition: all 0.15s;
     }
-    .filter-pill.active { background: var(--text); border-color: var(--text); color: var(--bg); }
-    .filter-pill:hover:not(.active) { border-color: var(--text); color: var(--text); }
+    .filter-pill.active { background: var(--clay); border-color: var(--clay); color: #F2E0B5; }
+    .filter-pill:hover:not(.active) { border-color: var(--clay); color: var(--clay); background: var(--bg3); }
 
     /* ─── CALENDAR VIEW ─── */
     .shows-calendar { display: flex; flex-direction: column; }
@@ -417,7 +428,7 @@
       transition: background 0.12s;
     }
     .show-row:first-child { border-top: 1px dashed var(--border); }
-    .show-row:hover { background: rgba(245,227,140,0.25); margin: 0 -1rem; padding: 1.1rem 1rem; }
+    .show-row:hover { background: rgba(255,176,118,0.22); margin: 0 -1rem; padding: 1.1rem 1rem; }
     .show-date-col {
       font-family: var(--mono);
       font-size: 0.6rem;
@@ -468,10 +479,11 @@
       font-family: var(--mono);
       font-size: 0.62rem;
       text-align: right;
-      color: var(--muted);
+      color: var(--text);
       line-height: 1.6;
     }
-    .show-venue-col strong { color: var(--text); font-weight: 400; }
+    .show-venue-col strong { color: var(--text); font-weight: 600; }
+    .show-venue-col .loc-text { color: var(--muted); }
     .show-price-col {
       font-family: var(--mono);
       font-size: 0.7rem;
@@ -479,7 +491,7 @@
       min-width: 50px;
       text-align: right;
     }
-    .price-free { color: var(--lime); font-weight: 700; }
+    .price-free { color: var(--olive); font-weight: 700; }
     .price-sold { color: var(--dim); }
     .price-paid { color: var(--text); }
     a.tix-link {
@@ -777,7 +789,11 @@
     }
 
     /* ─── FOOTER ─── */
-    .footer-rule { border: none; border-top: 1.5px solid var(--text); }
+    .footer-outer {
+      background: var(--clay);
+      border-top: 2px solid rgba(56,39,14,0.35);
+    }
+    .footer-rule { display: none; }
     .footer {
       max-width: 1240px;
       margin: 0 auto;
@@ -790,16 +806,16 @@
     .footer-brand {}
     .footer-logo {
       font-family: var(--logo);
-      font-weight: 700;
+      font-weight: 400;
       font-size: 1.4rem;
       letter-spacing: 0.01em;
       display: block;
       margin-bottom: 0.75rem;
-      color: var(--text);
+      color: #F2E0B5;
     }
     .footer-brand p {
       font-size: 0.78rem;
-      color: var(--muted);
+      color: rgba(242,224,181,0.7);
       line-height: 1.65;
       max-width: 220px;
     }
@@ -808,12 +824,12 @@
       font-size: 0.58rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: rgba(242,224,181,0.55);
       margin-bottom: 1rem;
     }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-    .footer-col a { font-size: 0.82rem; color: var(--muted); transition: color 0.15s; }
-    .footer-col a:hover { color: var(--accent); }
+    .footer-col a { font-size: 0.82rem; color: rgba(242,224,181,0.8); transition: color 0.15s; }
+    .footer-col a:hover { color: #FFB076; }
     .footer-bottom {
       max-width: 1240px;
       margin: 0 auto;
@@ -821,13 +837,13 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid rgba(242,224,181,0.2);
     }
     .footer-bottom span {
       font-family: var(--mono);
       font-size: 0.58rem;
       letter-spacing: 0.08em;
-      color: var(--muted);
+      color: rgba(242,224,181,0.55);
     }
 
     /* ─── PLAYLISTS (Spotify embeds) ─── */
@@ -865,10 +881,16 @@
 
     /* ─── SPIN THE GLOBE ─── */
     .globe-section-wrap {
-      background: var(--lavender);
-      border-top: 1.5px solid var(--text);
-      border-bottom: 1.5px solid var(--text);
+      background: var(--olive);
+      border-top: 2px solid rgba(56,39,14,0.4);
+      border-bottom: 2px solid rgba(56,39,14,0.4);
     }
+    /* Override section header text colors for olive bg */
+    .globe-section-wrap .section-title { color: #F2E0B5; }
+    .globe-section-wrap .section-label { color: rgba(242,224,181,0.65); }
+    .globe-section-wrap .section-link  { color: rgba(242,224,181,0.65); }
+    .globe-section-wrap .section-link:hover { color: #FFB076; }
+    .globe-section-wrap .rule { border-top-color: rgba(242,224,181,0.25); }
     .globe-country-badge {
       display: inline-flex;
       align-items: center;
@@ -877,9 +899,10 @@
       font-size: 0.65rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      border: 1.5px solid var(--text);
+      border: 2px solid rgba(242,224,181,0.5);
+      border-radius: 100px;
       padding: 5px 14px;
-      color: var(--text);
+      color: #F2E0B5;
       margin-bottom: 0.75rem;
     }
     .globe-tagline {
@@ -887,7 +910,7 @@
       font-size: 0.6rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: rgba(242,224,181,0.7);
       margin-bottom: 2.5rem;
     }
     .globe-grid {
@@ -897,18 +920,19 @@
     }
     @media (max-width: 600px) { .globe-grid { grid-template-columns: 1fr; } }
     .globe-card {
-      border: 1.5px solid var(--text);
+      border: 2px solid rgba(56,39,14,0.5);
+      border-radius: 12px;
       overflow: hidden;
-      transition: box-shadow 0.2s;
+      transition: box-shadow 0.2s, transform 0.15s;
       background: var(--bg);
     }
-    .globe-card:hover { box-shadow: 4px 4px 0 var(--text); }
+    .globe-card:hover { box-shadow: 5px 5px 0 rgba(56,39,14,0.35); transform: translate(-2px,-2px); }
     .globe-hero {
       aspect-ratio: 16/9;
       overflow: hidden;
       position: relative;
       background: var(--bg4);
-      border-bottom: 1.5px solid var(--text);
+      border-bottom: 1px solid rgba(56,39,14,0.25);
     }
     .globe-hero img {
       width: 100%;
@@ -974,15 +998,16 @@
     }
     @media (max-width: 600px) { .art-grid { grid-template-columns: 1fr; } }
     .art-card {
-      border: 1.5px solid var(--text);
+      border: 2px solid var(--border);
+      border-radius: 12px;
       overflow: hidden;
-      transition: box-shadow 0.2s;
+      transition: box-shadow 0.2s, transform 0.15s;
       text-decoration: none;
       color: inherit;
       display: block;
-      background: var(--bg);
+      background: var(--bg2);
     }
-    .art-card:hover { box-shadow: 4px 4px 0 var(--text); }
+    .art-card:hover { box-shadow: 5px 5px 0 rgba(56,39,14,0.2); transform: translate(-2px,-2px); border-color: var(--clay); }
     .art-img {
       aspect-ratio: 4/3;
       overflow: hidden;
@@ -1011,7 +1036,7 @@
       font-size: 0.55rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--lime);
+      color: var(--accent);
       margin-bottom: 0.4rem;
     }
     .art-title {
@@ -1081,7 +1106,8 @@
     }
 
     .calgrid-month-header {
-      border-top: 4px solid var(--text);
+      border-top: 4px solid var(--accent);
+      background: var(--bg2);
       padding: 0.7rem 1rem 0.4rem;
       display: flex;
       align-items: baseline;
@@ -1141,7 +1167,8 @@
       font-size: 0.5rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: var(--text);
+      opacity: 0.65;
       margin-top: 1px;
     }
     .calgrid-empty {
@@ -1642,6 +1669,7 @@
 </div>
 
 <!-- ── FOOTER ── -->
+<div class="footer-outer">
 <hr class="footer-rule">
 <div class="footer">
   <div class="footer-brand">
@@ -1681,6 +1709,7 @@
   <span>© 2026 Ground Ears — SLO · SB · Ventura</span>
   <span>Made on the Central Coast</span>
 </div>
+</div><!-- /footer-outer -->
 
 <!-- ── JAVASCRIPT ── -->
 <script>
